@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".AttendanceSubject">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Select Subject"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:layout_marginBottom="50dp"/>
+
+    <Spinner
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:gravity="center"
+        android:background="@drawable/border"/>
+    <Button
+        android:id="@+id/subject_button"
+        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_gradient"
+        android:textColor="#ffffff"
+        android:text="Take Attendnce"/>
+</LinearLayout>
