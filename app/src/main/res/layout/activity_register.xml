@@ -51,17 +51,14 @@
         android:layout_marginTop="25dp"
         android:autofillHints=""
         tools:ignore="TextFields" />
-    <EditText
+    <Spinner
         android:id="@+id/enter_roll"
-        android:hint="@string/enter_roll_number_in_two_digits"
         android:layout_below="@+id/enter_email"
         android:layout_height="wrap_content"
         android:layout_width="300dp"
-        android:singleLine="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:autofillHints=""
-        tools:ignore="TextFields" />
+        android:background="@drawable/border"/>
     <EditText
         android:id="@+id/enter_div"
         android:hint="@string/division"

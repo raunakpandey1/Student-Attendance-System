@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,13 +22,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 public class register extends AppCompatActivity {
 
-    private EditText name, branch, email, div, roll, pass, cpass;
+    private EditText name, branch, email, div, pass, cpass;
     private Button signup;
+    Spinner SpinRoll;
+    List<String> rollList = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+    String Roll = "";
+
     private FirebaseAuth mAuth;
     private ProgressDialog loadingbar;
     private FirebaseDatabase mdatabase;
@@ -50,11 +60,41 @@ public class register extends AppCompatActivity {
         name = findViewById(R.id.enter_name);
         branch = findViewById(R.id.enter_branch);
         email = findViewById(R.id.enter_email);
+        SpinRoll = findViewById(R.id.enter_roll);
         div = findViewById(R.id.enter_div);
-        roll = findViewById(R.id.enter_roll);
         pass = findViewById(R.id.enter_password);
         cpass = findViewById(R.id.enter_cpassword);
         signup = findViewById(R.id.signup_button);
+
+        rollList.add("Select Roll No.");
+        rollList.add("01");
+        rollList.add("02");
+        rollList.add("03");
+        rollList.add("04");
+        rollList.add("05");
+        rollList.add("06");
+        rollList.add("07");
+        rollList.add("08");
+        rollList.add("09");
+
+        for(int i=10;i<=80;i++){
+            rollList.add(String.valueOf(i));
+        }
+        adapter = new ArrayAdapter<String>(register.this,android.R.layout.simple_spinner_dropdown_item, rollList);
+        SpinRoll.setAdapter(adapter);
+        SpinRoll.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Roll = rollList.get(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +106,8 @@ public class register extends AppCompatActivity {
                 final String Name = name.getText().toString();
                 final String Branch = branch.getText().toString();
                 final String Email = email.getText().toString();
-                final String Div = div.getText().toString();
-                final String Roll = roll.getText().toString();
+                final String Div = div.getText().toString().toUpperCase();
+
                 String Pass = pass.getText().toString();
                 String Cpass = cpass.getText().toString();
 
@@ -79,8 +119,10 @@ public class register extends AppCompatActivity {
                     Toast.makeText(register.this, "Please write your Email....", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(Div)) {
                     Toast.makeText(register.this, "Please write your Division....", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(Roll)) {
-                    Toast.makeText(register.this, "Please write your Roll number....", Toast.LENGTH_SHORT).show();
+                } else if (Roll.equals("Select Roll No.")) {
+                    Toast.makeText(register.this, "Please Select your Roll number....", Toast.LENGTH_SHORT).show();
+                }else if (Roll.equals("")) {
+                    Toast.makeText(register.this, "Please Select your Roll number....", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(Pass)) {
                     Toast.makeText(register.this, "Please write your Password....", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(Cpass)) {

@@ -27,7 +27,6 @@
         <activity android:name=".TakeAttendance" />
         <activity android:name=".Posts" />
         <activity android:name=".Login_Activity">
-
         </activity>
         <activity android:name=".register" />
         <activity android:name=".MainActivity" />

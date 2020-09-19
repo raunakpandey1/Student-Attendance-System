@@ -31,9 +31,8 @@ public class SplashScreen extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase.getInstance().getReference();
         facRef = FirebaseDatabase.getInstance().getReference("Faculty");
-
-
     }
+
     @Override
     protected void onStart(){
         super.onStart();
@@ -69,6 +68,7 @@ public class SplashScreen extends AppCompatActivity {
             startActivity(MainIntent);
             finish();
         }
+
     }
 
     private void showDialogBox() {
@@ -93,7 +93,7 @@ public class SplashScreen extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) splashScreen.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         NetworkInfo mobile = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        if((wifi!=null && wifi.isConnected()) ||(mobile!=null && mobile.isConnected())){
+        if((wifi!=null && wifi.isConnected()) || (mobile!=null && mobile.isConnected())){
             return true;
         }
         else{
