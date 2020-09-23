@@ -33,6 +33,8 @@ public class Posts extends AppCompatActivity {
     private FirebaseAuth mAuth;
     ImageButton imgbutton;
 
+    List<post> PostList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,33 @@ public class Posts extends AppCompatActivity {
        });
     }
 
+
+    private void showList(){
+        dataRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+
+                    for(DataSnapshot StuSnapshot: snapshot.getChildren()){
+                        post Post = StuSnapshot.getValue(post.class);
+                        PostList.add(Post);
+                    }
+                }
+                PostsAdapter postsAdapter = new PostsAdapter(PostList, Posts.this);
+                recyclerView.setLayoutManager(new LinearLayoutManager(Posts.this));
+                postsAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(postsAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+       /*
     private void showList(){
 
         FirebaseRecyclerOptions options =
@@ -81,8 +110,6 @@ public class Posts extends AppCompatActivity {
                 postViewHolder.email.setText(post.getEmail());
                 postViewHolder.div.setText(post.getDiv());
                 postViewHolder.roll.setText(post.getRoll());
-                postViewHolder.attendance.setText(String.valueOf(post.getAttendance()));
-                postViewHolder.tattendance.setText(String.valueOf(post.getTattendance()));
             }
 
             @NonNull
@@ -97,5 +124,5 @@ public class Posts extends AppCompatActivity {
         adapter.startListening();
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
-    }
+    }   */
 }

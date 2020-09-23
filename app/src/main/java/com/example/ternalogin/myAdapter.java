@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
     class PostViewHolder extends RecyclerView.ViewHolder
     {
-        TextView name, branch, email, div, roll, attendance, tattendance;
+        TextView name, branch, email, div, roll;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -17,8 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
             email = (TextView) itemView.findViewById(R.id.stdEmail);
             div = (TextView) itemView.findViewById(R.id.stdDiv);
             roll = (TextView) itemView.findViewById(R.id.stdRoll);
-            attendance = (TextView) itemView.findViewById(R.id.attendance);
-            tattendance = (TextView) itemView.findViewById(R.id.tattendance);
         }
     }
 

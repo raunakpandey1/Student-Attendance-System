@@ -1,36 +1,19 @@
 package com.example.ternalogin;
 
 public class Detail {
-    String name,branch,email,div,roll;
-    int attendance, tattendance;
+    String name,branch,email,div,roll, attendance, tattendance;
 
     public Detail() {
 
     }
 
-    public Detail(String name, String branch, String email, String div, String roll, int attendance, int tattendance) {
+    public Detail(String name, String branch, String email, String div, String roll, String attendance, String tattendance) {
         this.name = name;
         this.branch = branch;
         this.email = email;
         this.div = div;
         this.roll = roll;
         this.attendance = attendance;
-        this.tattendance = tattendance;
-    }
-
-    public int getAttendance() {
-        return attendance;
-    }
-
-    public void setAttendance(int attendance) {
-        this.attendance = attendance;
-    }
-
-    public int getTattendance() {
-        return tattendance;
-    }
-
-    public void setTattendance(int tattendance) {
         this.tattendance = tattendance;
     }
 
@@ -72,5 +55,21 @@ public class Detail {
 
     public void setRoll(String roll) {
         this.roll = roll;
+    }
+
+    public String getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(String attendance) {
+        this.attendance = attendance;
+    }
+
+    public String getTattendance() {
+        return tattendance;
+    }
+
+    public void setTattendance(String tattendance) {
+        this.tattendance = tattendance;
     }
 }

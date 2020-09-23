@@ -1,16 +1,42 @@
 package com.example.ternalogin;
 
 public class PAList {
-    int present;
-    String absent,name;
+
+    String total, present, absent,name, id;
 
     public PAList() {
     }
 
-    public PAList(int present, String absent, String name) {
+    public PAList(String total, String present, String absent, String name, String id) {
+        this.total = total;
         this.present = present;
         this.absent = absent;
         this.name = name;
+        this.id = id;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    public String getPresent() {
+        return present;
+    }
+
+    public void setPresent(String present) {
+        this.present = present;
+    }
+
+    public String getAbsent() {
+        return absent;
+    }
+
+    public void setAbsent(String absent) {
+        this.absent = absent;
     }
 
     public String getName() {
@@ -21,19 +47,11 @@ public class PAList {
         this.name = name;
     }
 
-    public int getPresent() {
-        return present;
+    public String getId() {
+        return id;
     }
 
-    public void setPresent(int present) {
-        this.present = present;
-    }
-
-    public String getAbsent() {
-        return absent;
-    }
-
-    public void setAbsent(String absent) {
-        this.absent = absent;
+    public void setId(String id) {
+        this.id = id;
     }
 }

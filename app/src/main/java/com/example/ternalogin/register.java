@@ -103,11 +103,10 @@ public class register extends AppCompatActivity {
             }
 
             private void CreateNewAccount() {
-                final String Name = name.getText().toString();
+                final String Name = name.getText().toString().toUpperCase(); 
                 final String Branch = branch.getText().toString();
                 final String Email = email.getText().toString();
                 final String Div = div.getText().toString().toUpperCase();
-
                 String Pass = pass.getText().toString();
                 String Cpass = cpass.getText().toString();
 
@@ -139,9 +138,9 @@ public class register extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         CurrentUserId = mAuth.getCurrentUser().getUid();
-                                        Detail detail = new Detail(Name, Branch, Email, Div, Roll, 0, 0);
+                                        Detail detail = new Detail(Name, Branch, Email, Div, Roll, "", "");
                                         dataRef.child(Roll + Div + CurrentUserId).setValue(detail);
-                                        PAList palist = new PAList(0,"", Name);
+                                        PAList palist = new PAList("","", "",Name, Roll + Div + CurrentUserId);
                                         mRef.child(Roll + Div + CurrentUserId).setValue(palist);
                                         gRef.child(Roll + Div + CurrentUserId).setValue(palist);
                                         mecRef.child(Roll + Div + CurrentUserId).setValue(palist);

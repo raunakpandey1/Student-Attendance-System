@@ -2,19 +2,16 @@ package com.example.ternalogin;
 
 public class post {
     String name, branch, email, div, roll;
-    int attendance, tattendance;
 
     public post(){
     }
 
-    public post(String name, String branch, String email, String div, String roll, int attendance, int tattendance) {
+    public post(String name, String branch, String email, String div, String roll) {
         this.name = name;
         this.branch = branch;
         this.email = email;
         this.div = div;
         this.roll = roll;
-        this.attendance = attendance;
-        this.tattendance = tattendance;
     }
 
     public String getName() {
@@ -55,21 +52,5 @@ public class post {
 
     public void setRoll(String roll) {
         this.roll = roll;
-    }
-
-    public int getAttendance() {
-        return attendance;
-    }
-
-    public void setAttendance(int attendance) {
-        this.attendance = attendance;
-    }
-
-    public int getTattendance() {
-        return tattendance;
-    }
-
-    public void setTattendance(int tattendance) {
-        this.tattendance = tattendance;
     }
 }
