@@ -12,7 +12,6 @@
         android:id="@+id/at_mainToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Attendance"
         android:background="@drawable/gradient1"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"

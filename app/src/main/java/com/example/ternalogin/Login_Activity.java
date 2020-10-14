@@ -91,7 +91,6 @@ public class Login_Activity extends AppCompatActivity {
                                                     MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                     startActivity(MainIntent);
                                                     finish();
-
                                                 }
                                                 else{
                                                     loadingbar.dismiss();
@@ -120,7 +119,6 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
 
-
         tv_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +130,6 @@ public class Login_Activity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 /*
     @Override
@@ -165,7 +162,7 @@ public class Login_Activity extends AppCompatActivity {
     }
 */
     private void SendUserToPostsActivity(){
-        Intent MainIntent = new Intent(Login_Activity.this, Posts.class);
+        Intent MainIntent = new Intent(Login_Activity.this, studentProfile.class);
         MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(MainIntent);
         finish();

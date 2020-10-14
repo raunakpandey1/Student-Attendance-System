@@ -1,4 +1,4 @@
-package com.example.ternalogin;
+package com.example.ternalogin.model;
 
 public class PAList {
 

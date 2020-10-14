@@ -29,7 +29,6 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         mAuth = FirebaseAuth.getInstance();
-        FirebaseDatabase.getInstance().getReference();
         facRef = FirebaseDatabase.getInstance().getReference("Faculty");
     }
 
@@ -49,7 +48,9 @@ public class SplashScreen extends AppCompatActivity {
                     if(snapshot.hasChild(user)){
                         Intent MainIntent = new Intent(SplashScreen.this, MainActivity.class);
                         MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        MainIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(MainIntent);
+                        overridePendingTransition(0,0);
                         finish();
                     }
                     else{
@@ -103,7 +104,7 @@ public class SplashScreen extends AppCompatActivity {
 
 
     private void SendUserToPostsActivity(){
-        Intent MainIntent = new Intent(SplashScreen.this, Posts.class);
+        Intent MainIntent = new Intent(SplashScreen.this, studentProfile.class);
         MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(MainIntent);
         finish();

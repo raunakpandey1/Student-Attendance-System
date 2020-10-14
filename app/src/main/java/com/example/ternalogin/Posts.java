@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
+import com.example.ternalogin.model.post;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,16 +24,19 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Posts extends AppCompatActivity {
+public class Posts extends AppCompatActivity implements RecyclerViewClickInterface{
+
 
     RecyclerView recyclerView;
-    FirebaseRecyclerAdapter<post, PostViewHolder> adapter;
+   // FirebaseRecyclerAdapter<post, PostViewHolder> adapter;
     FirebaseDatabase database;
     DatabaseReference dataRef;
     private FirebaseAuth mAuth;
+    Toolbar toolbar;
     ImageButton imgbutton;
 
     List<post> PostList = new ArrayList<>();
+    String Subjec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,13 @@ public class Posts extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         imgbutton = findViewById(R.id.toolbar_logout);
+        toolbar = findViewById(R.id.mainToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Students");
+
+        Subjec = getIntent().getStringExtra("sub");
 
         //database
         mAuth = FirebaseAuth.getInstance();
@@ -94,14 +104,29 @@ public class Posts extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemClick(int position) {
+
+         Intent MainIntent = new Intent(Posts.this, showAttendance.class);
+         MainIntent.putExtra("id",PostList.get(position).getId());
+         MainIntent.putExtra("Sub",Subjec);
+         startActivity(MainIntent);
+    }
+
+    @Override
+    public void onLongItemClick(int position) {
+
+    }
+
+
+
+
        /*
     private void showList(){
-
         FirebaseRecyclerOptions options =
                 new FirebaseRecyclerOptions.Builder<post>()
                 .setQuery(dataRef, post.class)
                 .build();
-
         adapter = new FirebaseRecyclerAdapter<post, PostViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull PostViewHolder postViewHolder, int i, @NonNull post post) {
@@ -111,7 +136,6 @@ public class Posts extends AppCompatActivity {
                 postViewHolder.div.setText(post.getDiv());
                 postViewHolder.roll.setText(post.getRoll());
             }
-
             @NonNull
             @Override
             public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -120,7 +144,6 @@ public class Posts extends AppCompatActivity {
                 return new PostViewHolder(view);
             }
         };
-
         adapter.startListening();
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);

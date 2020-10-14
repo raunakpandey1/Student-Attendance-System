@@ -9,25 +9,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ternalogin.model.post;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewholder> {
 
     List<post> postList = new ArrayList<>();
-    Context context;
+    RecyclerViewClickInterface recyclerViewClickInterface;
     public PostsAdapter() {
     }
 
-    public PostsAdapter(List<post> postList, Context context) {
+    public PostsAdapter(List<post> postList, RecyclerViewClickInterface recyclerViewClickInterface) {
         this.postList = postList;
-        this.context = context;
+        this.recyclerViewClickInterface = recyclerViewClickInterface;
     }
 
     @NonNull
     @Override
     public PostViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater= LayoutInflater.from(context);
+        LayoutInflater layoutInflater= LayoutInflater.from(parent.getContext());
         View view=layoutInflater.inflate(R.layout.cdview,parent,false);
         return new PostsAdapter.PostViewholder(view);
     }
@@ -56,6 +59,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.PostViewhold
           email = (TextView) itemView.findViewById(R.id.stdEmail);
           div = (TextView) itemView.findViewById(R.id.stdDiv);
           roll = (TextView) itemView.findViewById(R.id.stdRoll);
+
+          itemView.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  recyclerViewClickInterface.onItemClick(getAdapterPosition());
+              }
+          });
       }
       private void setdata(String Name, String Branch, String Email, String Div, String Roll){
           name.setText(Name);

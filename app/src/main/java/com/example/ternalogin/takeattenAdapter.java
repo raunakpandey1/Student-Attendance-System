@@ -1,6 +1,7 @@
 package com.example.ternalogin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.ternalogin.model.student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +87,7 @@ public class takeattenAdapter extends RecyclerView.Adapter<takeattenAdapter.take
             Roll = itemView.findViewById(R.id.stdRoll);
             preButton = itemView.findViewById(R.id.present);
             abButton = itemView.findViewById(R.id.absent);
+
         }
 
         private void setdata(String name, String roll){

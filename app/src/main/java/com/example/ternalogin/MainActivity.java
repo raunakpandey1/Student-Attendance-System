@@ -2,6 +2,7 @@ package com.example.ternalogin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -76,8 +77,10 @@ public class MainActivity extends AppCompatActivity {
             private void SendUserToLoginActivity() {
                 Intent LoginIntent = new Intent(MainActivity.this, Login_Activity.class);
                 LoginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                LoginIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(LoginIntent);
-                fileList();
+                overridePendingTransition(0,0);
+                finish();
             }
         });
 
@@ -93,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         SSbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent MainIntent = new Intent(MainActivity.this, Posts.class);
+                Intent MainIntent = new Intent(MainActivity.this, seeAttendanceSubject.class);
                 startActivity(MainIntent);
             }
         });

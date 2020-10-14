@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ternalogin.model.Detail;
+import com.example.ternalogin.model.PAList;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,9 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class register extends AppCompatActivity {
 
@@ -39,7 +39,7 @@ public class register extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog loadingbar;
     private FirebaseDatabase mdatabase;
-    private DatabaseReference dataRef, mRef, gRef,subjects, mecRef, facRef;
+    private DatabaseReference dataRef, mRef, gRef,subjects, mecRef, facRef, stdid;
     String CurrentUserId;
 
     @Override
@@ -52,6 +52,7 @@ public class register extends AppCompatActivity {
         facRef = mdatabase.getReference("Faculty");
         dataRef = mdatabase.getReference().child("Students");
         subjects = mdatabase.getReference().child("subjects");
+        stdid = mdatabase.getReference().child("studentID");
         mRef = subjects.child("Math");
         gRef = subjects.child("Graphics");
         mecRef = subjects.child("Mechanics");
@@ -138,15 +139,16 @@ public class register extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         CurrentUserId = mAuth.getCurrentUser().getUid();
-                                        Detail detail = new Detail(Name, Branch, Email, Div, Roll, "", "");
+                                        Detail detail = new Detail(Name, Branch, Email, Div, Roll, "", "", Roll + Div + CurrentUserId);
                                         dataRef.child(Roll + Div + CurrentUserId).setValue(detail);
+                                        stdid.child(CurrentUserId).setValue(Roll + Div + CurrentUserId);
                                         PAList palist = new PAList("","", "",Name, Roll + Div + CurrentUserId);
                                         mRef.child(Roll + Div + CurrentUserId).setValue(palist);
                                         gRef.child(Roll + Div + CurrentUserId).setValue(palist);
                                         mecRef.child(Roll + Div + CurrentUserId).setValue(palist);
                                         Toast.makeText(register.this, "you are authenticated successfully ", Toast.LENGTH_SHORT).show();
                                         loadingbar.dismiss();
-                                        Intent MainIntent = new Intent(register.this, Posts.class);
+                                        Intent MainIntent = new Intent(register.this, studentProfile.class);
                                         MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(MainIntent);
                                         finish();

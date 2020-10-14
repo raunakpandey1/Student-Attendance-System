@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_centerVertical="true"
     tools:context=".MainActivity">
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainToolbar"
         android:layout_width="match_parent"
@@ -50,7 +49,7 @@
                 android:layout_marginBottom="15dp"
                 android:text="teachername"
                 android:textColor="#000000"
-                android:textSize="30dp" />
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/teach_dept"
@@ -87,6 +86,14 @@
             android:layout_marginTop="50dp"
             android:gravity="center">
 
+            <Spinner
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerSub"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border"/>
+
             <Button
                 android:id="@+id/SSButton"
                 android:layout_width="200dp"
@@ -94,14 +101,6 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/button_gradient"
                 android:text="See Attendance"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/TAButton"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_gradient"
-                android:text="take attendance"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 

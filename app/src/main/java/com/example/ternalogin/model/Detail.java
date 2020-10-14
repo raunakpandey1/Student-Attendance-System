@@ -1,13 +1,13 @@
-package com.example.ternalogin;
+package com.example.ternalogin.model;
 
 public class Detail {
-    String name,branch,email,div,roll, attendance, tattendance;
+    String name,branch,email,div,roll, attendance, tattendance, id;
 
     public Detail() {
 
     }
 
-    public Detail(String name, String branch, String email, String div, String roll, String attendance, String tattendance) {
+    public Detail(String name, String branch, String email, String div, String roll, String attendance, String tattendance, String id) {
         this.name = name;
         this.branch = branch;
         this.email = email;
@@ -15,6 +15,15 @@ public class Detail {
         this.roll = roll;
         this.attendance = attendance;
         this.tattendance = tattendance;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

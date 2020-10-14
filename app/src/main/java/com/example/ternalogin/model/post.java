@@ -1,17 +1,26 @@
-package com.example.ternalogin;
+package com.example.ternalogin.model;
 
 public class post {
-    String name, branch, email, div, roll;
+    String name, branch, email, div, roll, id;
 
     public post(){
     }
 
-    public post(String name, String branch, String email, String div, String roll) {
+    public post(String name, String branch, String email, String div, String roll, String id) {
         this.name = name;
         this.branch = branch;
         this.email = email;
         this.div = div;
         this.roll = roll;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

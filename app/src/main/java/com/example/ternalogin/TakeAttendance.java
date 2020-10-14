@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
+import com.example.ternalogin.model.student;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 public class TakeAttendance extends AppCompatActivity {
 
@@ -32,6 +30,7 @@ public class TakeAttendance extends AppCompatActivity {
     //TextView Subview;
     Button submitButton;
     RecyclerView recyclerView;
+    Toolbar toolbar;
     String datetime = "";
 
     @Override
@@ -47,7 +46,11 @@ public class TakeAttendance extends AppCompatActivity {
         recyclerView = findViewById(R.id.at_recycler_view);
         StudentList = new ArrayList<>();
         String Sub = getIntent().getStringExtra("sub");
-        //Subview.setText(Sub);
+        toolbar = findViewById(R.id.at_mainToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Attendance");
 
         database = FirebaseDatabase.getInstance();
         stdRef = FirebaseDatabase.getInstance().getReference("Students");
@@ -84,7 +87,7 @@ public class TakeAttendance extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a, EEEE");
                 datetime = simpleDateFormat.format(calendar.getTime());
 
                 String presentstudentID = "";
