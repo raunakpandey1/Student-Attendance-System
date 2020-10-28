@@ -35,7 +35,7 @@ public class studentProfile extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     private TextView Sname,Sdept,Sroll,Semail;
     String Subject = "Graphics";
-    String StudentID;
+    String StudentID="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,7 @@ public class studentProfile extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-        stdRef = database.getReference().child("Students");
+
 
 
         RetrieveData();
@@ -115,16 +115,15 @@ public class studentProfile extends AppCompatActivity {
             }
         });
 
-
-        stdRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild(StudentID)) {
-
-                    String name = snapshot.child(StudentID).child("name").getValue().toString().toUpperCase();
-                    String dept = snapshot.child(StudentID).child("branch").getValue().toString();
-                    String div = snapshot.child(StudentID).child("div").getValue().toString();
-                    String roll = snapshot.child(StudentID).child("roll").getValue().toString();
+        if(StudentID!=null){
+            stdRef = database.getReference().child("Students").child(StudentID);
+            stdRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String name = snapshot.child("name").getValue().toString();
+                    String dept = snapshot.child("branch").getValue().toString();
+                    String div = snapshot.child("div").getValue().toString();
+                    String roll = snapshot.child("roll").getValue().toString();
                     String email = snapshot.child(StudentID).child("email").getValue().toString();
                     String sub = div+roll;
                     Sname.setText(name);
@@ -132,13 +131,15 @@ public class studentProfile extends AppCompatActivity {
                     Sroll.setText(sub);
                     Semail.setText(email);
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
+
+
     }
 
     private void RetrieveData() {
