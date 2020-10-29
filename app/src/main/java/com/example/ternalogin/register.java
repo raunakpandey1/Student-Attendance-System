@@ -39,7 +39,7 @@ public class register extends AppCompatActivity {
     private FirebaseAuth mAuth1;
     private ProgressDialog loadingbar;
     private FirebaseDatabase mdatabase;
-    private DatabaseReference dataRef, mRef, gRef,subjects, mecRef, facRef, stdid;
+    private DatabaseReference dataRef, MathRef, GraphicRef,subjects, DiscreateRef, DlcoaRef, DsRef, JavaRef, facRef, stdid;
     String CurrentUserId;
 
     @Override
@@ -53,10 +53,13 @@ public class register extends AppCompatActivity {
         dataRef = mdatabase.getReference().child("Students");
         subjects = mdatabase.getReference().child("subjects");
         stdid = mdatabase.getReference().child("studentID");
-        mRef = subjects.child("Math");
-        gRef = subjects.child("Graphics");
-        mecRef = subjects.child("Mechanics");
-
+        //Subjects Reference
+        MathRef = subjects.child("Mathematics");
+        DiscreateRef = subjects.child("Discrete_Structures");
+        GraphicRef = subjects.child("Graphics");
+        DsRef = subjects.child("Data_Structure");
+        DlcoaRef = subjects.child("DLCOA");
+        JavaRef = subjects.child("OOPM(Java)");
 
         name = findViewById(R.id.enter_name);
         branch = findViewById(R.id.enter_branch);
@@ -143,9 +146,12 @@ public class register extends AppCompatActivity {
                                         dataRef.child(Roll + Div + CurrentUserId).setValue(detail);
                                         stdid.child(CurrentUserId).setValue(Roll + Div + CurrentUserId);
                                         PAList palist = new PAList("","", "",Name, Roll + Div + CurrentUserId);
-                                        mRef.child(Roll + Div + CurrentUserId).setValue(palist);
-                                        gRef.child(Roll + Div + CurrentUserId).setValue(palist);
-                                        mecRef.child(Roll + Div + CurrentUserId).setValue(palist);
+                                        MathRef.child(Roll + Div + CurrentUserId).setValue(palist);
+                                        GraphicRef.child(Roll + Div + CurrentUserId).setValue(palist);
+                                        DsRef.child(Roll + Div + CurrentUserId).setValue(palist);
+                                        DlcoaRef.child(Roll + Div + CurrentUserId).setValue(palist);
+                                        JavaRef.child(Roll + Div + CurrentUserId).setValue(palist);
+                                        DiscreateRef.child(Roll + Div + CurrentUserId).setValue(palist);
                                         mAuth1.signOut();
                                         Toast.makeText(register.this, "Student Registered Successfully...", Toast.LENGTH_SHORT).show();
                                         loadingbar.dismiss();
