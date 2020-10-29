@@ -24,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TeacherLogin" />
         <activity android:name=".AttendanceSubject" />
         <activity android:name=".TakeAttendance"
             android:parentActivityName=".MainActivity"/>

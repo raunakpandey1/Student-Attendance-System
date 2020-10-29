@@ -29,7 +29,6 @@ import java.util.Objects;
 public class Login_Activity extends AppCompatActivity {
     private EditText enter_email, enter_password;
     private Button login_button;
-    private TextView tv_signup, teach_login;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingbar;
     private DatabaseReference facRef;
@@ -41,21 +40,11 @@ public class Login_Activity extends AppCompatActivity {
         enter_email = findViewById(R.id.enter_email);
         enter_password = findViewById(R.id.enter_password);
         login_button = findViewById(R.id.login_button);
-        tv_signup = findViewById(R.id.tv_signup);
-        teach_login = findViewById(R.id.tv_login_teacher);
         loadingbar = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase.getInstance().getReference();
         facRef = FirebaseDatabase.getInstance().getReference("Faculty");
-
-        teach_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent register = new Intent(Login_Activity.this, TeacherLogin.class);
-                startActivity(register);
-            }
-        });
 
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,18 +105,6 @@ public class Login_Activity extends AppCompatActivity {
 
                             });
                 }
-            }
-        });
-
-        tv_signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SendUserToRegisterActivity();
-            }
-            private void SendUserToRegisterActivity(){
-                Intent register = new Intent(Login_Activity.this, register.class);
-                startActivity(register);
-                finish();
             }
         });
     }

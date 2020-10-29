@@ -36,7 +36,7 @@ public class register extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     String Roll = "";
 
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth1;
     private ProgressDialog loadingbar;
     private FirebaseDatabase mdatabase;
     private DatabaseReference dataRef, mRef, gRef,subjects, mecRef, facRef, stdid;
@@ -47,7 +47,7 @@ public class register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         loadingbar = new ProgressDialog(this);
-        mAuth = FirebaseAuth.getInstance();
+        mAuth1 = FirebaseAuth.getInstance();
         mdatabase = FirebaseDatabase.getInstance();
         facRef = mdatabase.getReference("Faculty");
         dataRef = mdatabase.getReference().child("Students");
@@ -133,12 +133,12 @@ public class register extends AppCompatActivity {
                     loadingbar.setMessage("Setting up your profile");
                     loadingbar.show();
                     loadingbar.setCanceledOnTouchOutside(true);
-                    mAuth.createUserWithEmailAndPassword(Email, Pass)
+                    mAuth1.createUserWithEmailAndPassword(Email, Pass)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        CurrentUserId = mAuth.getCurrentUser().getUid();
+                                        CurrentUserId = mAuth1.getCurrentUser().getUid();
                                         Detail detail = new Detail(Name, Branch, Email, Div, Roll, "", "", Roll + Div + CurrentUserId);
                                         dataRef.child(Roll + Div + CurrentUserId).setValue(detail);
                                         stdid.child(CurrentUserId).setValue(Roll + Div + CurrentUserId);
@@ -146,11 +146,12 @@ public class register extends AppCompatActivity {
                                         mRef.child(Roll + Div + CurrentUserId).setValue(palist);
                                         gRef.child(Roll + Div + CurrentUserId).setValue(palist);
                                         mecRef.child(Roll + Div + CurrentUserId).setValue(palist);
-                                        Toast.makeText(register.this, "you are authenticated successfully ", Toast.LENGTH_SHORT).show();
+                                        mAuth1.signOut();
+                                        Toast.makeText(register.this, "Student Registered Successfully...", Toast.LENGTH_SHORT).show();
                                         loadingbar.dismiss();
-                                        Intent MainIntent = new Intent(register.this, studentProfile.class);
-                                        MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(MainIntent);
+                                        //Intent MainIntent = new Intent(register.this, register.class);
+                                       // MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        //startActivity(MainIntent);
                                         finish();
                                     } else {
                                         String message = task.getException().getMessage();

@@ -11,83 +11,82 @@
         android:layout_height="128dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         app:srcCompat="@drawable/terna"
         android:contentDescription="@string/todo" />
-
-    <EditText
-        android:id="@+id/enter_email"
-        android:layout_width="335dp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login_logo"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentEnd="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:autofillHints=""
-        android:background="@drawable/textbox_gradient"
-        android:drawableStart="@drawable/email"
-        android:ems="10"
-        android:hint="@string/Email"
-        android:singleLine="true"
-        android:textSize="18sp"
-        tools:ignore="TextFields" />
+        android:layout_width="match_parent"
+        android:layout_below="@+id/login_logo"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
 
-    <EditText
-        android:id="@+id/enter_password"
-        android:layout_width="335dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/enter_email"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentEnd="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:autofillHints=""
-        android:singleLine="true"
-        android:background="@drawable/textbox_gradient"
-        android:drawableStart="@drawable/password"
-        android:ems="10"
-        android:hint="@string/Password"
-        android:inputType="textPassword" />
+        <androidx.cardview.widget.CardView
+            android:layout_below="@+id/login_logo"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:cardCornerRadius="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            app:cardElevation="10dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:padding="10dp"
+                android:gravity="center">
+                <EditText
+                    android:id="@+id/enter_email"
+                    android:layout_width="315dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="30dp"
+                    android:autofillHints=""
+                    android:background="@drawable/textbox_gradient"
+                    android:drawableStart="@drawable/email"
+                    android:hint="@string/Email"
+                    android:singleLine="true"
+                    android:textSize="18sp"
+                    tools:ignore="TextFields" />
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_below="@id/enter_password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/button_gradient"
-        android:text="@string/login"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/enter_password"
+                    android:layout_width="315dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_centerHorizontal="true"
+                    android:autofillHints=""
+                    android:singleLine="true"
+                    android:background="@drawable/textbox_gradient"
+                    android:drawableStart="@drawable/password"
+                    android:ems="10"
+                    android:hint="@string/Password"
+                    android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/tv_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+                <Button
+                    android:id="@+id/login_button"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/enter_password"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@drawable/button_gradient"
+                    android:text="@string/login"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-        android:layout_below="@id/login_button"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentEnd="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="@string/don_t_have_account_create_a_new_account"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="16sp" />
-    <TextView
-        android:id="@+id/tv_login_teacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        </androidx.cardview.widget.CardView>
 
-        android:layout_below="@id/tv_signup"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentEnd="false"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="Login as Faculty"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="18sp" />
+
+    </LinearLayout>
+
+
 
 
 </RelativeLayout>

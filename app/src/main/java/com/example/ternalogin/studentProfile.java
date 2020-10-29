@@ -47,7 +47,7 @@ public class studentProfile extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         stdID = database.getReference("studentID").child(CurrentUserId);
         databaseRef = database.getReference("subjects");
-
+        stdRef = database.getReference().child("Students");
 
         imgbutton1 = findViewById(R.id.fac_toolbar_logout);
         SSbutton = findViewById(R.id.SSButton);
@@ -56,22 +56,6 @@ public class studentProfile extends AppCompatActivity {
         Sdept = findViewById(R.id.teach_dept);
         Sroll = findViewById(R.id.teach_sub);
         Semail = findViewById(R.id.teach_email);
-
-
-        stdID.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    StudentID = snapshot.getValue().toString();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-
 
         RetrieveData();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -85,8 +69,7 @@ public class studentProfile extends AppCompatActivity {
 
             }
         });
-
-
+        getStudentId();
 
         SSbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,35 +94,45 @@ public class studentProfile extends AppCompatActivity {
                 Intent LoginIntent = new Intent(studentProfile.this, Login_Activity.class);
                 LoginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(LoginIntent);
-                fileList();
+                finish();
             }
         });
 
-        if(StudentID!=null){
-            stdRef = database.getReference().child("Students").child(StudentID);
-            stdRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String name = snapshot.child("name").getValue().toString();
-                    String dept = snapshot.child("branch").getValue().toString();
-                    String div = snapshot.child("div").getValue().toString();
-                    String roll = snapshot.child("roll").getValue().toString();
-                    String email = snapshot.child(StudentID).child("email").getValue().toString();
-                    String sub = div+roll;
-                    Sname.setText(name);
-                    Sdept.setText(dept);
-                    Sroll.setText(sub);
-                    Semail.setText(email);
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
 
 
+
+
+    }
+
+    public void getStudentId(){
+        stdID.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                StudentID = snapshot.getValue().toString();
+                stdRef.child(StudentID).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String name = snapshot.child("name").getValue().toString();
+                        String dept = snapshot.child("branch").getValue().toString();
+                        String div = snapshot.child("div").getValue().toString();
+                        String roll = snapshot.child("roll").getValue().toString();
+                        String email = snapshot.child("email").getValue().toString();
+                        String sub = div+roll;
+                        Sname.setText(name);
+                        Sdept.setText(dept);
+                        Sroll.setText(sub);
+                        Semail.setText(email);
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
 
     private void RetrieveData() {
