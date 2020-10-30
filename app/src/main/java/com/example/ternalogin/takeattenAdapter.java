@@ -1,7 +1,6 @@
 package com.example.ternalogin;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +22,14 @@ public class takeattenAdapter extends RecyclerView.Adapter<takeattenAdapter.take
     private Context context;
     public static List<String> presentList = new ArrayList<>();
     public static List<String> absentList = new ArrayList<>();
-
-    public takeattenAdapter() {
-    }
+    private final boolean[] mcheckedStateA;
+    private final boolean[] mcheckedStateB;
 
     public takeattenAdapter(List<student> studentList, Context context) {
         StudentList = studentList;
         this.context = context;
+        mcheckedStateA = new boolean[studentList.size()];
+        mcheckedStateB = new boolean[studentList.size()];
     }
 
     @NonNull
@@ -41,19 +41,34 @@ public class takeattenAdapter extends RecyclerView.Adapter<takeattenAdapter.take
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final takeattenViewholder holder, int position) {
+    public void onBindViewHolder(@NonNull final takeattenViewholder holder, final int position) {
         String name = StudentList.get(position).getName();
         String roll = StudentList.get(position).getRoll();
         holder.setdata(name,roll);
+        holder.preButton.setChecked(false);
+        holder.abButton.setChecked(false);
+
+        if(mcheckedStateA[position]){
+            holder.preButton.setChecked(true);
+        }else{
+            holder.preButton.setChecked(false);
+        }
+        if(mcheckedStateB[position]){
+            holder.abButton.setChecked(true);
+        }else{
+            holder.abButton.setChecked(false);
+        }
 
         holder.preButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    mcheckedStateA[position] = false;
                     if(!presentList.contains(StudentList.get(holder.getAdapterPosition()).getId())){
                         presentList.add(StudentList.get(holder.getAdapterPosition()).getId());
                     }
                 }else{
+                    mcheckedStateA[position] = true;
                     presentList.remove(StudentList.get(holder.getAdapterPosition()).getId());
                 }
             }
@@ -63,10 +78,12 @@ public class takeattenAdapter extends RecyclerView.Adapter<takeattenAdapter.take
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    mcheckedStateB[position] = false;
                     if(!absentList.contains(StudentList.get(holder.getAdapterPosition()).getId())) {
                         absentList.add(StudentList.get(holder.getAdapterPosition()).getId());
                     }
                 }else{
+                    mcheckedStateB[position] = true;
                     absentList.remove(StudentList.get(holder.getAdapterPosition()).getId());
                 }
             }
