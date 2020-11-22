@@ -15,19 +15,7 @@
         app:title="Home (TEC)"
         app:titleMarginStart="25dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <ImageButton
-        android:id="@+id/fac_toolbar_logout"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignEnd="@id/mainToolbar"
-        android:layout_alignBottom="@+id/mainToolbar"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/transparent_gradient"
-        android:contentDescription="@string/todo"
-        android:focusableInTouchMode="false"
-        android:scaleType="centerCrop"
-        android:src="@drawable/logout" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -235,17 +223,25 @@
                             android:layout_height="match_parent"
                             android:layout_width="match_parent"
                             android:gravity="center">
-                            <ImageView
-                                android:src="@drawable/assignment"
-                                android:layout_height="70dp"
-                                android:layout_width="70dp"
-                                android:layout_gravity="center"/>
+                            <ImageButton
+                                android:id="@+id/fac_toolbar_logout"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_alignEnd="@id/mainToolbar"
+                                android:layout_alignBottom="@+id/mainToolbar"
+
+
+                                android:background="@color/colorPrimary"
+                                android:contentDescription="@string/todo"
+                                android:focusableInTouchMode="false"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/logout" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Assignments"
+                                android:text="Exit"
                                 android:textAlignment="center"
-                                android:textSize="18dp"
+                                android:textSize="20dp"
                                 android:textStyle="bold"
                                 />
                         </LinearLayout>
