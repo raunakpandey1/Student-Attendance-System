@@ -236,14 +236,15 @@
                             android:layout_width="match_parent"
                             android:gravity="center">
                             <ImageView
-                                android:src="@drawable/assignment"
+                                android:src="@drawable/exit"
                                 android:layout_height="70dp"
                                 android:layout_width="70dp"
                                 android:layout_gravity="center"/>
                             <TextView
+                                android:id="@+id/exit"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Assignments"
+                                android:text="Exit App"
                                 android:textAlignment="center"
                                 android:textSize="18dp"
                                 android:textStyle="bold"

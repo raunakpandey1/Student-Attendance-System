@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tname,tdept,tsub,temail,TAbutton,SSbutton,addStudent;
+    private TextView tname,tdept,tsub,temail,TAbutton,SSbutton,addStudent,exitApp;
     private ImageButton imgbutton1;
     private FirebaseAuth mAuth;
     private DatabaseReference dataRef;
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         TAbutton = findViewById(R.id.TAButton);
         SSbutton = findViewById(R.id.SSButton);
         addStudent = findViewById(R.id.add_student);
+        exitApp = findViewById(R.id.exit);
         imgbutton1 = findViewById(R.id.fac_toolbar_logout);
         tname = findViewById(R.id.teach_name);
         tdept = findViewById(R.id.teach_dept);
@@ -106,6 +107,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent MainIntent = new Intent(MainActivity.this, register.class);
                 startActivity(MainIntent);
+            }
+        });
+
+        exitApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
