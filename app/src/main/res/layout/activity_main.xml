@@ -114,6 +114,7 @@
                     android:columnOrderPreserved="false">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cdTA"
                         android:layout_height="150dp"
                         android:layout_width="150dp"
                         android:clickable="true"
@@ -148,6 +149,7 @@
 
                     </androidx.cardview.widget.CardView>
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cdVA"
                         android:layout_height="150dp"
                         android:layout_width="150dp"
                         android:clickable="true"
@@ -174,7 +176,7 @@
                                 android:id="@+id/SSButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="See\nAttendance"
+                                android:text="View\nAttendance"
                                 android:textAlignment="center"
                                 android:textSize="18dp"
                                 android:textStyle="bold"
@@ -183,6 +185,7 @@
 
                     </androidx.cardview.widget.CardView>
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cdAS"
                         android:layout_height="150dp"
                         android:layout_width="150dp"
                         android:clickable="true"
@@ -218,6 +221,7 @@
 
                     </androidx.cardview.widget.CardView>
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cdEA"
                         android:layout_height="150dp"
                         android:layout_width="150dp"
                         android:clickable="true"

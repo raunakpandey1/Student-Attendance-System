@@ -3,6 +3,7 @@ package com.example.ternalogin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton imgbutton1;
     private FirebaseAuth mAuth;
     private DatabaseReference dataRef;
+    CardView cdTA,cdVA,cdAS,cdEA;
     String CurrentUserId;
 
     @Override
@@ -45,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         tdept = findViewById(R.id.teach_dept);
         tsub = findViewById(R.id.teach_sub);
         temail = findViewById(R.id.teach_email);
+
+        cdTA = findViewById(R.id.cdTA);
+        cdVA = findViewById(R.id.cdVA);
+        cdAS = findViewById(R.id.cdAS);
+        cdEA = findViewById(R.id.cdEA);
 
         dataRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -86,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        TAbutton.setOnClickListener(new View.OnClickListener() {
+        cdTA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent MainIntent = new Intent(MainActivity.this, AttendanceSubject.class);
@@ -94,15 +101,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        SSbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent MainIntent = new Intent(MainActivity.this, seeAttendanceSubject.class);
-                startActivity(MainIntent);
-            }
-        });
-
-        addStudent.setOnClickListener(new View.OnClickListener() {
+        cdAS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent MainIntent = new Intent(MainActivity.this, register.class);
@@ -110,12 +109,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        exitApp.setOnClickListener(new View.OnClickListener() {
+        cdVA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent MainIntent = new Intent(MainActivity.this, seeAttendanceSubject.class);
+                startActivity(MainIntent);
+            }
+        });
+
+        cdEA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
     }
 }
