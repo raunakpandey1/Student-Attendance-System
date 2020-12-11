@@ -1,14 +1,17 @@
 package com.example.ternalogin;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.ternalogin.model.student;
 import com.google.firebase.database.DataSnapshot;
@@ -86,31 +89,69 @@ public class TakeAttendance extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a, EEEE");
-                datetime = simpleDateFormat.format(calendar.getTime());
 
-                String presentstudentID = "";
-                for (int i = 0; i < takeattenAdapter.presentList.size(); i++) {
-                    presentstudentID = takeattenAdapter.presentList.get(i);
-                    dataRef.child(presentstudentID).child("present").push().setValue(datetime);
-                    dataRef.child(presentstudentID).child("total").push().setValue(datetime);
-                    stdRef.child(presentstudentID).child("attendance").push().setValue(datetime);
-                    stdRef.child(presentstudentID).child("tattendance").push().setValue(datetime);
-                }
+                final AlertDialog dialog=new AlertDialog.Builder(TakeAttendance.this).create();
+                View view= LayoutInflater.from(TakeAttendance.this).inflate(R.layout.attendancepopup,null);
+                TextView total,present,absent;
+                Button cancleBtn, confirmBtn;
+                total=view.findViewById(R.id.TotalStudentTV);
+                present=view.findViewById(R.id.presentStudentTV);
+                absent=view.findViewById(R.id.absentStudentTV);
+                cancleBtn=view.findViewById(R.id.canclebtn);
+                confirmBtn=view.findViewById(R.id.confirmbtn);
+                total.setText(Integer.toString(StudentList.size()));
+                present.setText(Integer.toString(takeattenAdapter.presentList.size()));
+                absent.setText(Integer.toString(takeattenAdapter.absentList.size()));
+                dialog.setCancelable(true);
 
-                String absentstudentID = "";
-                for (int i = 0; i < takeattenAdapter.absentList.size(); i++) {
-                    absentstudentID = takeattenAdapter.absentList.get(i);
-                    dataRef.child(absentstudentID).child("absent").push().setValue(datetime);
-                    dataRef.child(absentstudentID).child("total").push().setValue(datetime);
-                    stdRef.child(absentstudentID).child("tattendance").push().setValue(datetime);
-                }
+                dialog.setView(view);
 
-                takeattenAdapter.presentList.clear();
-                takeattenAdapter.absentList.clear();
 
-                finish();
+                cancleBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                confirmBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //last
+                        Calendar calendar = Calendar.getInstance();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a, EEEE");
+                        datetime = simpleDateFormat.format(calendar.getTime());
+
+                        String presentstudentID = "";
+                        for (int i = 0; i < takeattenAdapter.presentList.size(); i++) {
+                            presentstudentID = takeattenAdapter.presentList.get(i);
+                            dataRef.child(presentstudentID).child("present").push().setValue(datetime);
+                            dataRef.child(presentstudentID).child("total").push().setValue(datetime);
+                            stdRef.child(presentstudentID).child("attendance").push().setValue(datetime);
+                            stdRef.child(presentstudentID).child("tattendance").push().setValue(datetime);
+                        }
+
+                        String absentstudentID = "";
+                        for (int i = 0; i < takeattenAdapter.absentList.size(); i++) {
+                            absentstudentID = takeattenAdapter.absentList.get(i);
+                            dataRef.child(absentstudentID).child("absent").push().setValue(datetime);
+                            dataRef.child(absentstudentID).child("total").push().setValue(datetime);
+                            stdRef.child(absentstudentID).child("tattendance").push().setValue(datetime);
+                        }
+
+                        takeattenAdapter.presentList.clear();
+                        takeattenAdapter.absentList.clear();
+
+                        finish();
+
+                    }
+                });
+
+                dialog.show();
+
+
+
+
             }
         });
 
