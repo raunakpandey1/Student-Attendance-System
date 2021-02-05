@@ -22,7 +22,7 @@
 |![alt text][take attendance]  | ![alt text][Students] | ![alt text][show attendance]  |
 
 |  Create Student Profile |
-|:-------------: |
-|![alt text][create profile]  |
+| ------------- |
+|![alt text][create profile] |
 
 
