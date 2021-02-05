@@ -14,8 +14,7 @@
 * Admin Can added information of  student ,and Create Profile.
 * Teacher can take sutdent attendance live,can view studennt attendance.
 * Student can view their attendance with selecting spicific course.
-
-
+## Screen Shot
 [splash]: https://github.com/skgupta77159/rawprojects/blob/master/Student%20Attendance%20System/AttendanceSystem01.png
 [Dashboard]: https://github.com/skgupta77159/rawprojects/blob/master/Student%20Attendance%20System/AttendanceSystem02.png
 [Subject]: https://github.com/skgupta77159/rawprojects/blob/master/Student%20Attendance%20System/AttendanceSystem03.png
