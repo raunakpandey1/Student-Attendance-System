@@ -9,7 +9,7 @@
 ## Feature
 * Optimized Splash Screen.
 * Attractive UI design.
-* Recyceler View, Tab Layout, Custom Appbar, Custom many components.
+* Recyceler View, Tab Layout, Custom Appbar, many Custom components.
 * Two Users: 1.Admin ,2.Student .
 * Admin Can added information of  student ,and Create Profile.
 * Teacher can take sutdent attendance live,can view studennt attendance.
