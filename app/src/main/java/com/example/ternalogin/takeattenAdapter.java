@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,22 +16,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ternalogin.model.student;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class takeattenAdapter extends RecyclerView.Adapter<takeattenAdapter.takeattenViewholder> {
 
     private List<student> StudentList = new ArrayList<>();
     private Context context;
+    int i;
     public static List<String> presentList = new ArrayList<>();
-    public static List<String> absentList = new ArrayList<>();
-    private final boolean[] mcheckedStateA;
-    private final boolean[] mcheckedStateB;
+    public static List<String> absentList = new ArrayList<String>();
+  //  private final boolean[] mcheckedStateA;
+ //   private final boolean[] mcheckedStateB;
 
     public takeattenAdapter(List<student> studentList, Context context) {
         StudentList = studentList;
         this.context = context;
-        mcheckedStateA = new boolean[studentList.size()];
-        mcheckedStateB = new boolean[studentList.size()];
+        for(i=0; i<studentList.size();i++){
+            absentList.add(studentList.get(i).getId());
+        }
+       // mcheckedStateA = new boolean[studentList.size()];
+       // mcheckedStateB = new boolean[studentList.size()];
     }
 
     @NonNull
@@ -45,36 +52,58 @@ public class takeattenAdapter extends RecyclerView.Adapter<takeattenAdapter.take
         String name = StudentList.get(position).getName();
         String roll = StudentList.get(position).getRoll();
         holder.setdata(name,roll);
-        holder.preButton.setChecked(false);
-        holder.abButton.setChecked(false);
+      //  holder.abButton.setChecked(false);
 
-        if(mcheckedStateA[position]){
-            holder.preButton.setChecked(true);
+       /* if(mcheckedStateA[position]){
+            holder.PreCheckBox.setChecked(true);
         }else{
-            holder.preButton.setChecked(false);
+            holder.PreCheckBox.setChecked(false);
         }
         if(mcheckedStateB[position]){
             holder.abButton.setChecked(true);
         }else{
             holder.abButton.setChecked(false);
-        }
+        }  */
 
-        holder.preButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.PreCheckBox.setOnCheckedChangeListener(null);
+        holder.PreCheckBox.setChecked(StudentList.get(position).isState());
+        holder.PreCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    mcheckedStateA[position] = false;
-                    if(!presentList.contains(StudentList.get(holder.getAdapterPosition()).getId())){
-                        presentList.add(StudentList.get(holder.getAdapterPosition()).getId());
-                    }
-                }else{
-                    mcheckedStateA[position] = true;
+                StudentList.get(position).setState(isChecked);
+                if(StudentList.get(position).isState()){
+                    presentList.add(StudentList.get(holder.getAdapterPosition()).getId());
+                    absentList.remove(StudentList.get(holder.getAdapterPosition()).getId());
+                }
+                if(!StudentList.get(position).isState()) {
+                    absentList.add(StudentList.get(holder.getAdapterPosition()).getId());
                     presentList.remove(StudentList.get(holder.getAdapterPosition()).getId());
                 }
             }
         });
 
-        holder.abButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*holder.PreCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    mcheckedStateA[position] = false;
+                    StudentList.get(position).setState(true);
+                    if(StudentList.get(position).isState()){
+                        presentList.add(StudentList.get(holder.getAdapterPosition()).getId());
+                        absentList.remove(StudentList.get(holder.getAdapterPosition()).getId());
+                    }
+                }else{
+                    mcheckedStateA[position] = true;
+                    StudentList.get(position).setState(false);
+                    if(!StudentList.get(position).isState()) {
+                        absentList.add(StudentList.get(holder.getAdapterPosition()).getId());
+                        presentList.remove(StudentList.get(holder.getAdapterPosition()).getId());
+                    }
+                }
+            }
+        }); */
+
+       /* holder.abButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
@@ -87,7 +116,7 @@ public class takeattenAdapter extends RecyclerView.Adapter<takeattenAdapter.take
                     absentList.remove(StudentList.get(holder.getAdapterPosition()).getId());
                 }
             }
-        });
+        });  */
     }
 
     @Override
@@ -97,13 +126,12 @@ public class takeattenAdapter extends RecyclerView.Adapter<takeattenAdapter.take
 
     static class takeattenViewholder extends RecyclerView.ViewHolder {
         TextView Name, Roll;
-        RadioButton preButton, abButton;
+        CheckBox PreCheckBox;
         public takeattenViewholder(@NonNull View itemView) {
             super(itemView);
             Name = itemView.findViewById(R.id.stdName);
             Roll = itemView.findViewById(R.id.stdRoll);
-            preButton = itemView.findViewById(R.id.present);
-            abButton = itemView.findViewById(R.id.absent);
+            PreCheckBox = itemView.findViewById(R.id.present);
 
         }
 

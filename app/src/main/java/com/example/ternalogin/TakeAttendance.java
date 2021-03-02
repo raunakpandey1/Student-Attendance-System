@@ -139,6 +139,7 @@ public class TakeAttendance extends AppCompatActivity {
                             stdRef.child(absentstudentID).child("tattendance").push().setValue(datetime);
                         }
 
+
                         takeattenAdapter.presentList.clear();
                         takeattenAdapter.absentList.clear();
 
@@ -149,12 +150,16 @@ public class TakeAttendance extends AppCompatActivity {
 
                 dialog.show();
 
-
-
-
             }
         });
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        takeattenAdapter.presentList.clear();
+        takeattenAdapter.absentList.clear();
     }
 }

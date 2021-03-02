@@ -2,11 +2,20 @@ package com.example.ternalogin.model;
 
 public class student {
     String name, roll, id;
+    boolean state = false;
 
     public student(String name, String roll, String id) {
         this.name = name;
         this.roll = roll;
         this.id = id;
+    }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
     }
 
     public String getId() {
