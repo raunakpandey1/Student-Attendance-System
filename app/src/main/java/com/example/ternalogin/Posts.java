@@ -118,34 +118,4 @@ public class Posts extends AppCompatActivity implements RecyclerViewClickInterfa
 
     }
 
-
-
-
-       /*
-    private void showList(){
-        FirebaseRecyclerOptions options =
-                new FirebaseRecyclerOptions.Builder<post>()
-                .setQuery(dataRef, post.class)
-                .build();
-        adapter = new FirebaseRecyclerAdapter<post, PostViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull PostViewHolder postViewHolder, int i, @NonNull post post) {
-                postViewHolder.name.setText(post.getName());
-                postViewHolder.branch.setText(post.getBranch());
-                postViewHolder.email.setText(post.getEmail());
-                postViewHolder.div.setText(post.getDiv());
-                postViewHolder.roll.setText(post.getRoll());
-            }
-            @NonNull
-            @Override
-            public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.cdview, parent, false);
-                return new PostViewHolder(view);
-            }
-        };
-        adapter.startListening();
-        adapter.notifyDataSetChanged();
-        recyclerView.setAdapter(adapter);
-    }   */
 }
