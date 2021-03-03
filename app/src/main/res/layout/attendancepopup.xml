@@ -96,13 +96,13 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:textColor="#ffffff"
-            android:background="@drawable/button_gradient"
+            android:background="@drawable/button_background_color"
             android:text="Cancel"/>
 
         <Button
             android:id="@+id/confirmbtn"
             android:textColor="#ffffff"
-            android:background="@drawable/button_gradient"
+            android:background="@drawable/button_background_color"
             android:text="Confirm"
             android:layout_marginLeft="10dp"
             android:layout_width="0dp"

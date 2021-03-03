@@ -35,6 +35,9 @@ public class TakeAttendance extends AppCompatActivity {
     RecyclerView recyclerView;
     Toolbar toolbar;
     String datetime = "";
+    String year = "";
+    String month = "";
+    String Sub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class TakeAttendance extends AppCompatActivity {
         submitButton = findViewById(R.id.submit_button);
         recyclerView = findViewById(R.id.at_recycler_view);
         StudentList = new ArrayList<>();
-        String Sub = getIntent().getStringExtra("sub");
+        Sub = getIntent().getStringExtra("sub");
         toolbar = findViewById(R.id.at_mainToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,7 +60,7 @@ public class TakeAttendance extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         stdRef = FirebaseDatabase.getInstance().getReference("Students");
-        dataRef = database.getReference("subjects").child(Sub);
+
 
         stdRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -120,15 +123,35 @@ public class TakeAttendance extends AppCompatActivity {
                         //last
                         Calendar calendar = Calendar.getInstance();
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a, EEEE");
+                        SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+                        SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
                         datetime = simpleDateFormat.format(calendar.getTime());
+                        year = yearFormat.format(calendar.getTime());
+                        month = monthFormat.format(calendar.getTime());
+                        dataRef = database.getReference("year").child(year).child(Sub).child(month);
 
                         String presentstudentID = "";
                         for (int i = 0; i < takeattenAdapter.presentList.size(); i++) {
                             presentstudentID = takeattenAdapter.presentList.get(i);
+                            final String finalPresentstudentID = presentstudentID;
                             dataRef.child(presentstudentID).child("present").push().setValue(datetime);
                             dataRef.child(presentstudentID).child("total").push().setValue(datetime);
                             stdRef.child(presentstudentID).child("attendance").push().setValue(datetime);
                             stdRef.child(presentstudentID).child("tattendance").push().setValue(datetime);
+                            dataRef.child(presentstudentID).child("id").setValue(presentstudentID);
+
+                            stdRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    dataRef.child(finalPresentstudentID).child("name").setValue(snapshot.child(finalPresentstudentID).child("name").getValue());
+                                    dataRef.child(finalPresentstudentID).child("roll").setValue(snapshot.child(finalPresentstudentID).child("roll").getValue());
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
 
                         String absentstudentID = "";

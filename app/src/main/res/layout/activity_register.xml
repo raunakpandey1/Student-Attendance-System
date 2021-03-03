@@ -102,7 +102,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/signup"
-        android:background="@drawable/button_gradient"
+        android:background="@drawable/button_background_color"
         android:layout_below="@id/enter_cpassword"
         android:textColor="#FFFFFF"
         android:layout_centerHorizontal="true"

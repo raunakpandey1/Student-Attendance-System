@@ -100,7 +100,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:background="@drawable/button_gradient"
+                android:background="@drawable/button_background_color"
                 android:text="See Attendance"
                 android:textColor="#FFFFFF" />
         </LinearLayout>

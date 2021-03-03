@@ -25,7 +25,7 @@ public class takeattenAdapter extends RecyclerView.Adapter<takeattenAdapter.take
     private Context context;
     int i;
     public static List<String> presentList = new ArrayList<>();
-    public static List<String> absentList = new ArrayList<String>();
+    public static List<String> absentList = new ArrayList<>();
   //  private final boolean[] mcheckedStateA;
  //   private final boolean[] mcheckedStateB;
 

@@ -75,7 +75,7 @@
                     android:layout_below="@id/enter_password"
                     android:layout_marginBottom="25dp"
                     android:layout_marginTop="35dp"
-                    android:background="@drawable/button_gradient"
+                    android:background="@drawable/button_background_color"
                     android:text="@string/login"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
