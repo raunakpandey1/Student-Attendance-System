@@ -248,7 +248,7 @@
                                 android:id="@+id/exit"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Exit App"
+                                android:text="Analyse Attendance"
                                 android:textAlignment="center"
                                 android:textSize="18dp"
                                 android:textStyle="bold"

@@ -120,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
         cdEA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent MainIntent = new Intent(MainActivity.this, MonthAttendance.class);
+                startActivity(MainIntent);
             }
         });
     }

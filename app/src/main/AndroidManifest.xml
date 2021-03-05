@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MonthAttendance"></activity>
         <activity android:name=".seeAttendanceSubject" />
         <activity android:name=".studentProfile" />
         <activity android:name=".showAttendance" />

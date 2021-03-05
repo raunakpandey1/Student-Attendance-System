@@ -17,11 +17,11 @@
         android:layout_marginBottom="50dp"/>
 
     <Spinner
+        android:id="@+id/spinnerSub"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:id="@+id/spinnerSub"
-        android:gravity="center"
-        android:background="@drawable/border"/>
+        android:background="@drawable/border"
+        android:gravity="center" />
     <Button
         android:id="@+id/subject_button_see"
         android:layout_height="wrap_content"
