@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".seeAttendanceSubject"></activity>
+        <activity android:name=".MonthAttendance"></activity>
+        <activity android:name=".seeAttendanceSubject" />
         <activity android:name=".studentProfile" />
         <activity android:name=".showAttendance" />
         <activity android:name=".SplashScreen">
@@ -25,10 +26,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".AttendanceSubject" />
-        <activity android:name=".TakeAttendance"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".Posts"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".TakeAttendance"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".Posts"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".Login_Activity" />
         <activity android:name=".register" />
         <activity android:name=".MainActivity" />
