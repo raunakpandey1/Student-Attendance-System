@@ -26,7 +26,7 @@ public class seeAttendanceSubject extends AppCompatActivity {
     Button button;
     FirebaseDatabase database;
     DatabaseReference databaseRef;
-    List<String> SubjectList = new ArrayList<>();;
+    List<String> SubjectList = new ArrayList<>();
     ArrayAdapter<String> adapter;
     String Subject = "Graphics";
 
