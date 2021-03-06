@@ -88,18 +88,18 @@
             android:gravity="center">
 
             <Spinner
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerSub"
                 android:gravity="center"
-                android:layout_marginBottom="20dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/border"/>
 
             <Button
                 android:id="@+id/SSButton"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/button_background_color"
                 android:text="See Attendance"
                 android:textColor="#FFFFFF" />

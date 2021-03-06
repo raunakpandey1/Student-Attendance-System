@@ -18,14 +18,17 @@
 
     <Spinner
         android:id="@+id/spinnerSub"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:background="@drawable/border"
         android:gravity="center" />
     <Button
         android:id="@+id/subject_button_see"
         android:layout_height="wrap_content"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/button_background_color"
         android:textColor="#ffffff"

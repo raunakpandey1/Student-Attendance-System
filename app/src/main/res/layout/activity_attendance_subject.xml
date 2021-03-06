@@ -17,16 +17,19 @@
         android:layout_marginBottom="50dp"/>
 
     <Spinner
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinner"
         android:gravity="center"
+        android:layout_margin="20dp"
         android:background="@drawable/border"/>
     <Button
         android:id="@+id/subject_button"
         android:layout_height="wrap_content"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/button_background_color"
         android:textColor="#ffffff"
         android:text="Take Attendnce"/>
