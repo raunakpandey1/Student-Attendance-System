@@ -18,32 +18,34 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Attendance\n Record"
+                android:text="Attendance\nRecord"
                 android:textAlignment="center"
                 android:layout_marginBottom="30dp"
                 android:textSize="30dp"/>
             <Spinner
                 android:id="@+id/year_spinner"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
                 android:background="@drawable/border"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"/>
+                />
             <Spinner
                 android:id="@+id/fMonth_spinner"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
                 android:background="@drawable/border"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"/>
+                android:layout_height="wrap_content"/>
             <Spinner
                 android:id="@+id/tMonth_spinner"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
                 android:background="@drawable/border"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"/>
+                android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/btn_next"
                 android:layout_height="wrap_content"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
                 android:background="@drawable/button_background_color"
                 android:textColor="#ffffff"
                 android:text="Next"/>
