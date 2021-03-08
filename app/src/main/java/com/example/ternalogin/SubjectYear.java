@@ -28,13 +28,15 @@ public class SubjectYear extends AppCompatActivity {
     Spinner sub_spinner;
     Button btn_next1;
     ArrayAdapter<String> subAdapter;
-    String Subject,Year;
+    String Subject,Year, fMonth, tMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_year);
         Year = getIntent().getStringExtra("years");
+        fMonth = getIntent().getStringExtra("fMonth");
+        tMonth = getIntent().getStringExtra("tMonth");
 
         sub_spinner = findViewById(R.id.sub_spinner);
         btn_next1 = findViewById(R.id.btn_next1);

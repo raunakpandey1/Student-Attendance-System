@@ -35,6 +35,7 @@ public class MonthAttendance extends AppCompatActivity {
     Spinner year_spinner, fMonth_spinner, tMonth_spinner;
     ArrayAdapter<String> yearAdapter, fMonthAdapter, tMonthAdapter;
     String Year, fMonth, tMonth;
+    int f,t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,7 @@ public class MonthAttendance extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 fMonth = parent.getSelectedItem().toString();
+                f = position;
                 Toast.makeText(MonthAttendance.this, fMonth, Toast.LENGTH_SHORT).show();
             }
             @Override
@@ -117,6 +119,7 @@ public class MonthAttendance extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tMonth = parent.getSelectedItem().toString();
+                t = position;
                 Toast.makeText(MonthAttendance.this, tMonth, Toast.LENGTH_SHORT).show();
             }
             @Override
@@ -127,11 +130,13 @@ public class MonthAttendance extends AppCompatActivity {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if( Year==null || fMonth==null || tMonth==null || Year=="Select Year" || fMonth=="Select Month" || tMonth=="Select Month"){
+                if( Year==null || fMonth==null || tMonth==null || Year=="Select Year" || fMonth=="Select Month" || tMonth=="Select Month" || f>t){
                     Toast.makeText(MonthAttendance.this, "Please select a valid value...", Toast.LENGTH_SHORT).show();
                 }else {
                     Intent MainIntent = new Intent(MonthAttendance.this, SubjectYear.class);
                     MainIntent.putExtra("years", Year);
+                    MainIntent.putExtra("fMonth", fMonth);
+                    MainIntent.putExtra("tMonth", tMonth);
                     startActivity(MainIntent);
                 }
             }

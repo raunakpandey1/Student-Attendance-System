@@ -7,7 +7,6 @@
     tools:context=".register">
 
     <TextView
-
         android:id="@+id/crtpro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
