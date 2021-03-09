@@ -22,7 +22,7 @@ public class StudMonthAttendance extends AppCompatActivity {
     List<String> monthList = new ArrayList<>();
     List<monModel> studList = new ArrayList<>();
     String Subject,Year;
-    int fMonth, tMonth;
+    int fMonth, tMonth,i;
 
 
     @Override
@@ -52,20 +52,32 @@ public class StudMonthAttendance extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         databaseRef = database.getReference("year").child(Year).child(Subject);
 
-        for(int i=fMonth; i<=tMonth; i++){
+        for(i=fMonth; i<=tMonth; i++){
             databaseRef.child(monthList.get(fMonth)).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    int j=0;
-                    for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                        String id = dataSnapshot.child("id").getValue().toString();
-                        String name = dataSnapshot.child("name").getValue().toString();
-                        String roll = dataSnapshot.child("roll").getValue().toString();
-                        long present = dataSnapshot.child("present").getChildrenCount();
-                        long total = dataSnapshot.child("total").getChildrenCount();
-                        monModel monmodel = new monModel(id, name, roll, present, total);
-                        studList.set(j, monmodel);
-                        j++;
+                    if(i==fMonth) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            String id = dataSnapshot.child("id").getValue().toString();
+                            String name = dataSnapshot.child("name").getValue().toString();
+                            String roll = dataSnapshot.child("roll").getValue().toString();
+                            long present = dataSnapshot.child("present").getChildrenCount();
+                            long total = dataSnapshot.child("total").getChildrenCount();
+                            monModel monmodel = new monModel(id, name, roll, present, total);
+                            studList.add(monmodel);
+                        }
+                    }else{
+                        int j=0;
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                           // String id = dataSnapshot.child("id").getValue().toString();
+                           // String name = dataSnapshot.child("name").getValue().toString();
+                           // String roll = dataSnapshot.child("roll").getValue().toString();
+                            long present = dataSnapshot.child("present").getChildrenCount();
+                            long total = dataSnapshot.child("total").getChildrenCount();
+                            studList.get(j).setPresent(studList.get(j).getPresent()+present);
+                            studList.get(j).setTotal(studList.get(j).getTotal()+total);
+                            j++;
+                        }
                     }
                 }
 

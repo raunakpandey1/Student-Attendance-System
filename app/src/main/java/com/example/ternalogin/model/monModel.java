@@ -3,7 +3,6 @@ package com.example.ternalogin.model;
 public class monModel {
     String id,name,roll;
     long present,total;
-    long gPresent=0, gTotal=0;
     public monModel() {
     }
 
@@ -13,8 +12,6 @@ public class monModel {
         this.roll = roll;
         this.present = present;
         this.total = total;
-        gPresent = gPresent + present;
-        gTotal = gTotal + total;
     }
 
     public String getId() {
@@ -55,21 +52,5 @@ public class monModel {
 
     public void setTotal(long total) {
         this.total = total;
-    }
-
-    public long getgPresent() {
-        return gPresent;
-    }
-
-    public void setgPresent(long gPresent) {
-        this.gPresent = gPresent;
-    }
-
-    public long getgTotal() {
-        return gTotal;
-    }
-
-    public void setgTotal(long gTotal) {
-        this.gTotal = gTotal;
     }
 }
