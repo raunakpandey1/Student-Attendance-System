@@ -3,6 +3,7 @@ package com.example.ternalogin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -73,5 +74,20 @@ public class SubjectYear extends AppCompatActivity {
             }
         });
 
+        btn_next1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( Subject==null || Subject=="Select Subject"){
+                    Toast.makeText(SubjectYear.this, "Please select a valid value...", Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent MainIntent = new Intent(SubjectYear.this, StudMonthAttendance.class);
+                    MainIntent.putExtra("subject", Subject);
+                    MainIntent.putExtra("years", Year);
+                    MainIntent.putExtra("fMonth", fMonth);
+                    MainIntent.putExtra("tMonth", tMonth);
+                    startActivity(MainIntent);
+                }
+            }
+        });
     }
 }
