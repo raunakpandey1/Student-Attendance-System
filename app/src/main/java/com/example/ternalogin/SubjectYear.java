@@ -67,7 +67,7 @@ public class SubjectYear extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Subject = parent.getSelectedItem().toString();
-                Toast.makeText(SubjectYear.this, Subject, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SubjectYear.this, Subject+fMonth+tMonth , Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
