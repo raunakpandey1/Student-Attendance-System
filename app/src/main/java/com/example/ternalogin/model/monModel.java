@@ -3,6 +3,7 @@ package com.example.ternalogin.model;
 public class monModel {
     String id,name,roll;
     long present,total;
+    long gPresent=0, gTotal=0;
     public monModel() {
     }
 
@@ -12,6 +13,8 @@ public class monModel {
         this.roll = roll;
         this.present = present;
         this.total = total;
+        gPresent = gPresent+present;
+        gTotal = gTotal+total;
     }
 
     public String getId() {

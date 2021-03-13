@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,7 +52,6 @@ public class StudMonthAttendance extends AppCompatActivity {
         Year = getIntent().getStringExtra("years");
         fMonth = Integer.parseInt(getIntent().getStringExtra("fMonth"));
         tMonth = Integer.parseInt(getIntent().getStringExtra("tMonth"));
-        studList.clear();
         monthList.add(0,"Select Month");
         monthList.add(1,"January");
         monthList.add(2,"February");
@@ -65,64 +65,38 @@ public class StudMonthAttendance extends AppCompatActivity {
         monthList.add(10,"October");
         monthList.add(11,"November");
         monthList.add(12,"December");
-
+        studList.clear();
         database = FirebaseDatabase.getInstance();
         databaseRef = database.getReference("year");
-        //monthList.get(fMonth)
+        i=fMonth;
 
-        databaseRef.child(Year).child(Subject).child(monthList.get(fMonth)).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        String id = (String) dataSnapshot.child("id").getValue();
-                        String name = (String) dataSnapshot.child("name").getValue();
-                        String roll = (String) dataSnapshot.child("roll").getValue();
-                        long present = dataSnapshot.child("present").getChildrenCount();
-                        long total = dataSnapshot.child("total").getChildrenCount();
-                        monModel monmodel = new monModel(id, name, roll, present, total);
-                        studList.add(monmodel);
-                    }
-                    StudentMonthAdapter studentMonthAdapter = new StudentMonthAdapter(studList);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(StudMonthAttendance.this));
-                    studentMonthAdapter.notifyDataSetChanged();
-                    recyclerView.setAdapter(studentMonthAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-      /*  for(i=fMonth; i<=tMonth; i++){
-            databaseRef.child(monthList.get(fMonth)).addValueEventListener(new ValueEventListener() {
+        for(i=fMonth;i<=tMonth;i++){
+            databaseRef.child(Year).child(Subject).child(monthList.get(i)).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        String id = dataSnapshot.child("id").getValue().toString();
-                        String name = dataSnapshot.child("name").getValue().toString();
-                        String roll = dataSnapshot.child("roll").getValue().toString();
-                        long present = dataSnapshot.child("present").getChildrenCount();
-                        long total = dataSnapshot.child("total").getChildrenCount();
-                        monModel monmodel = new monModel(id, name, roll, present, total);
-                        studList.add(monmodel);
+                    if(snapshot.exists()){
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            String id = (String) dataSnapshot.child("id").getValue();
+                            String name = (String) dataSnapshot.child("name").getValue();
+                            String roll = (String) dataSnapshot.child("roll").getValue();
+                            long present = dataSnapshot.child("present").getChildrenCount();
+                            long total = dataSnapshot.child("total").getChildrenCount();
+                            monModel monmodel = new monModel(id, name, roll, present, total);
+                            studList.add(monmodel);
+                        }
+                        StudentMonthAdapter studentMonthAdapter = new StudentMonthAdapter(studList);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(StudMonthAttendance.this));
+                        studentMonthAdapter.notifyDataSetChanged();
+                        recyclerView.setAdapter(studentMonthAdapter);
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
                 }
             });
-        } */
+        }
+
 
     }
-
-
-
-
-
-
 }
