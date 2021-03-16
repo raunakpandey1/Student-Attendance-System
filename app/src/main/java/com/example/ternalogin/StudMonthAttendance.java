@@ -81,21 +81,21 @@ public class StudMonthAttendance extends AppCompatActivity {
                     if(snapshot.exists()){
                         j=0;
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            String id = (String) dataSnapshot.child("id").getValue();
-                            String name = (String) dataSnapshot.child("name").getValue();
-                            String roll = (String) dataSnapshot.child("roll").getValue();
+                          //  String id = (String) dataSnapshot.child("id").getValue();
+                          //  String name = (String) dataSnapshot.child("name").getValue();
+                          //  String roll = (String) dataSnapshot.child("roll").getValue();
                             long present = dataSnapshot.child("present").getChildrenCount();
                             long total = dataSnapshot.child("total").getChildrenCount();
                             preArr[j]= preArr[j] + (int)present;
                             totArr[j]= totArr[j] + (int)total;
                             j++;
-                            monModel monmodel = new monModel(id, name, roll, present, total);
-                            studList.add(monmodel);
+                           // monModel monmodel = new monModel(id, name, roll, present, total);
+                          //  studList.add(monmodel);
                         }
-                        StudentMonthAdapter studentMonthAdapter = new StudentMonthAdapter(studList, preArr, totArr);
+                      /*  StudentMonthAdapter studentMonthAdapter = new StudentMonthAdapter(studList, preArr, totArr);
                         recyclerView.setLayoutManager(new LinearLayoutManager(StudMonthAttendance.this));
                         studentMonthAdapter.notifyDataSetChanged();
-                        recyclerView.setAdapter(studentMonthAdapter);
+                        recyclerView.setAdapter(studentMonthAdapter);  */
                     }
                 }
 
@@ -107,6 +107,36 @@ public class StudMonthAttendance extends AppCompatActivity {
 
 
 
+
+
+        databaseRef.child(Year).child(Subject).child(monthList.get(fMonth)).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    // j=0;
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String id = (String) dataSnapshot.child("id").getValue();
+                        String name = (String) dataSnapshot.child("name").getValue();
+                        String roll = (String) dataSnapshot.child("roll").getValue();
+                        // long present = dataSnapshot.child("present").getChildrenCount();
+                        // long total = dataSnapshot.child("total").getChildrenCount();
+                        // preArr[j]= preArr[j] + (int)present;
+                        // totArr[j]= totArr[j] + (int)total;
+                        // j++;
+                        monModel monmodel = new monModel(id, name, roll, 0, 0);
+                        studList.add(monmodel);
+                    }
+                    StudentMonthAdapter studentMonthAdapter = new StudentMonthAdapter(studList, preArr, totArr);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(StudMonthAttendance.this));
+                    studentMonthAdapter.notifyDataSetChanged();
+                    recyclerView.setAdapter(studentMonthAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
     }
 }
