@@ -89,27 +89,6 @@ public class StudMonthAttendance extends AppCompatActivity {
                             preArr[j]= preArr[j] + (int)present;
                             totArr[j]= totArr[j] + (int)total;
                             j++;
-                            // present=0;
-                            // total=0;
-
-
-                       /* for(i=fMonth;i<=tMonth;i++) {
-                            newRef.child(monthList.get(i)).child(id).addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    long tPresent = snapshot.child("present").getChildrenCount();
-                                    long tTotal = snapshot.child("total").getChildrenCount();
-                                    present = present+tPresent;
-                                    total = total+tTotal;
-                                    Toast.makeText(StudMonthAttendance.this, String.valueOf(tPresent), Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-                        }*/
                             monModel monmodel = new monModel(id, name, roll, present, total);
                             studList.add(monmodel);
                         }
