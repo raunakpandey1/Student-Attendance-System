@@ -27,13 +27,15 @@ public class StudMonthAttendance extends AppCompatActivity {
     RecyclerView recyclerView;
     Toolbar toolbar;
     FirebaseDatabase database;
-    DatabaseReference databaseRef;
+    DatabaseReference databaseRef, newRef;
     List<String> monthList = new ArrayList<>();
     List<monModel> studList = new ArrayList<>();
+    List<String> idsList = new ArrayList<>();
+    int[] preArr = new int[100];
+    int[] totArr = new int[100];
     String Subject,Year;
     int fMonth, tMonth,i;
     int j;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,23 +70,50 @@ public class StudMonthAttendance extends AppCompatActivity {
         studList.clear();
         database = FirebaseDatabase.getInstance();
         databaseRef = database.getReference("year");
-        i=fMonth;
+        newRef = database.getReference("year");
+
+        newRef.child(Year).child(Subject);
 
         for(i=fMonth;i<=tMonth;i++){
             databaseRef.child(Year).child(Subject).child(monthList.get(i)).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.exists()){
+                        j=0;
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             String id = (String) dataSnapshot.child("id").getValue();
                             String name = (String) dataSnapshot.child("name").getValue();
                             String roll = (String) dataSnapshot.child("roll").getValue();
                             long present = dataSnapshot.child("present").getChildrenCount();
                             long total = dataSnapshot.child("total").getChildrenCount();
+                            preArr[j]= preArr[j] + (int)present;
+                            totArr[j]= totArr[j] + (int)total;
+                            j++;
+                            // present=0;
+                            // total=0;
+
+
+                       /* for(i=fMonth;i<=tMonth;i++) {
+                            newRef.child(monthList.get(i)).child(id).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    long tPresent = snapshot.child("present").getChildrenCount();
+                                    long tTotal = snapshot.child("total").getChildrenCount();
+                                    present = present+tPresent;
+                                    total = total+tTotal;
+                                    Toast.makeText(StudMonthAttendance.this, String.valueOf(tPresent), Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }*/
                             monModel monmodel = new monModel(id, name, roll, present, total);
                             studList.add(monmodel);
                         }
-                        StudentMonthAdapter studentMonthAdapter = new StudentMonthAdapter(studList);
+                        StudentMonthAdapter studentMonthAdapter = new StudentMonthAdapter(studList, preArr, totArr);
                         recyclerView.setLayoutManager(new LinearLayoutManager(StudMonthAttendance.this));
                         studentMonthAdapter.notifyDataSetChanged();
                         recyclerView.setAdapter(studentMonthAdapter);
@@ -96,6 +125,8 @@ public class StudMonthAttendance extends AppCompatActivity {
                 }
             });
         }
+
+
 
 
     }

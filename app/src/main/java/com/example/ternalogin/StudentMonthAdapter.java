@@ -1,5 +1,6 @@
 package com.example.ternalogin;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,19 @@ import java.util.List;
 public class StudentMonthAdapter extends RecyclerView.Adapter<StudentMonthAdapter.StudentMonthViewholder> {
 
     List<monModel> studList = new ArrayList<>();
+    int[] preArr = new int[100];
+    int[] totArr = new int[100];
+    float f;
 
     public StudentMonthAdapter() {
     }
-    public StudentMonthAdapter(List<monModel> studList) {
+   /* public StudentMonthAdapter(List<monModel> studList) {
         this.studList = studList;
+    } */
+    public StudentMonthAdapter(List<monModel> studList, int[] preArr, int[] totArr) {
+        this.studList = studList;
+        this.preArr = preArr;
+        this.totArr = totArr;
     }
 
 
@@ -38,8 +47,10 @@ public class StudentMonthAdapter extends RecyclerView.Adapter<StudentMonthAdapte
 
         String name = studList.get(position).getName();
         String roll = studList.get(position).getRoll();
-        long present = studList.get(position).getPresent();
-        long total = studList.get(position).getTotal();
+        String present = String.valueOf(preArr[position]);
+        String total = String.valueOf(totArr[position]);
+        //String present = String.valueOf(studList.get(position).getPresent());
+        //String total = String.valueOf(studList.get(position).getTotal());
         holder.setdata(name, roll, present, total);
     }
 
@@ -61,14 +72,21 @@ public class StudentMonthAdapter extends RecyclerView.Adapter<StudentMonthAdapte
             Total1 = (TextView) itemView.findViewById(R.id.total1);
             Percentages = (TextView) itemView.findViewById(R.id.percentages);
         }
-        private void setdata(String name, String roll, long present, long total){
+        private void setdata(String name, String roll, String present, String total){
             Name.setText(name);
             Roll.setText(roll);
             Present.setText(String.valueOf(present));
-            Absent.setText(String.valueOf(total-present));
+            Absent.setText(String.valueOf(Long.parseLong(total)-Long.parseLong(present)));
             Total.setText(String.valueOf(total));
             Total1.setText(String.valueOf(total));
-            Percentages.setText("");
+            f = ((Float.parseFloat(present)/Float.parseFloat(total))*100);
+            f = (float) (Math.round(f*100.0)/100.0);
+            Percentages.setText(String.valueOf(f)+"%");
+            if(f<75){
+                Percentages.setTextColor(Color.parseColor("#FF0000"));
+            }else{
+                Percentages.setTextColor(Color.parseColor("#000000"));
+            }
 
         }
     }
