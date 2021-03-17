@@ -2,12 +2,12 @@ package com.example.ternalogin.model;
 
 public class monModel {
     String id,name,roll;
-    long present,total;
+    int present,total;
     float percentage;
     public monModel() {
     }
 
-    public monModel(String id, String name, String roll, long present, long total, float percentage) {
+    public monModel(String id, String name, String roll, int present, int total, float percentage) {
         this.id = id;
         this.name = name;
         this.roll = roll;
@@ -44,7 +44,7 @@ public class monModel {
         return present;
     }
 
-    public void setPresent(long present) {
+    public void setPresent(int present) {
         this.present = present;
     }
 
@@ -52,7 +52,7 @@ public class monModel {
         return total;
     }
 
-    public void setTotal(long total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 }

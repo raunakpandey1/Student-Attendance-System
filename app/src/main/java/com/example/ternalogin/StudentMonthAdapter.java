@@ -46,12 +46,15 @@ public class StudentMonthAdapter extends RecyclerView.Adapter<StudentMonthAdapte
     @Override
     public void onBindViewHolder(@NonNull StudentMonthViewholder holder, int position) {
 
+        String id = studList.get(position).getId();
         String name = studList.get(position).getName();
         String roll = studList.get(position).getRoll();
         int present = preArr[position];
         int total = totArr[position];
         f = (((float)present/(float)total)*100);
         f = (float) (Math.round(f*100.0)/100.0);
+        monModel monmodel = new monModel(id ,name ,roll ,present ,total, f);
+        defaulterList.add(monmodel);
         //String present = String.valueOf(studList.get(position).getPresent());
         //String total = String.valueOf(studList.get(position).getTotal());
         holder.setdata(name, roll, present, total, f);
