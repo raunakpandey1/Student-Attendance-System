@@ -123,7 +123,7 @@ public class StudMonthAttendance extends AppCompatActivity {
                         // preArr[j]= preArr[j] + (int)present;
                         // totArr[j]= totArr[j] + (int)total;
                         // j++;
-                        monModel monmodel = new monModel(id, name, roll, 0, 0);
+                        monModel monmodel = new monModel(id, name, roll, 0, 0,0);
                         studList.add(monmodel);
                     }
                     StudentMonthAdapter studentMonthAdapter = new StudentMonthAdapter(studList, preArr, totArr);

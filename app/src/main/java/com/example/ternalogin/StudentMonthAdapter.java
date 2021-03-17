@@ -18,6 +18,7 @@ import java.util.List;
 public class StudentMonthAdapter extends RecyclerView.Adapter<StudentMonthAdapter.StudentMonthViewholder> {
 
     List<monModel> studList = new ArrayList<>();
+    public static List<monModel> defaulterList = new ArrayList<>();
     int[] preArr = new int[100];
     int[] totArr = new int[100];
     float f;
@@ -47,11 +48,13 @@ public class StudentMonthAdapter extends RecyclerView.Adapter<StudentMonthAdapte
 
         String name = studList.get(position).getName();
         String roll = studList.get(position).getRoll();
-        String present = String.valueOf(preArr[position]);
-        String total = String.valueOf(totArr[position]);
+        int present = preArr[position];
+        int total = totArr[position];
+        f = (((float)present/(float)total)*100);
+        f = (float) (Math.round(f*100.0)/100.0);
         //String present = String.valueOf(studList.get(position).getPresent());
         //String total = String.valueOf(studList.get(position).getTotal());
-        holder.setdata(name, roll, present, total);
+        holder.setdata(name, roll, present, total, f);
     }
 
     @Override
@@ -72,15 +75,13 @@ public class StudentMonthAdapter extends RecyclerView.Adapter<StudentMonthAdapte
             Total1 = (TextView) itemView.findViewById(R.id.total1);
             Percentages = (TextView) itemView.findViewById(R.id.percentages);
         }
-        private void setdata(String name, String roll, String present, String total){
+        private void setdata(String name, String roll, int present, int total, float f){
             Name.setText(name);
             Roll.setText(roll);
             Present.setText(String.valueOf(present));
-            Absent.setText(String.valueOf(Long.parseLong(total)-Long.parseLong(present)));
+            Absent.setText(String.valueOf(total-present));
             Total.setText(String.valueOf(total));
             Total1.setText(String.valueOf(total));
-            f = ((Float.parseFloat(present)/Float.parseFloat(total))*100);
-            f = (float) (Math.round(f*100.0)/100.0);
             Percentages.setText(String.valueOf(f)+"%");
             if(f<75){
                 Percentages.setTextColor(Color.parseColor("#FF0000"));

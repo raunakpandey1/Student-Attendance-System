@@ -3,18 +3,17 @@ package com.example.ternalogin.model;
 public class monModel {
     String id,name,roll;
     long present,total;
-    long gPresent=0, gTotal=0;
+    float percentage;
     public monModel() {
     }
 
-    public monModel(String id, String name, String roll, long present, long total) {
+    public monModel(String id, String name, String roll, long present, long total, float percentage) {
         this.id = id;
         this.name = name;
         this.roll = roll;
         this.present = present;
         this.total = total;
-        gPresent = gPresent+present;
-        gTotal = gTotal+total;
+        this.percentage = percentage;
     }
 
     public String getId() {
