@@ -72,20 +72,33 @@ public class MonthAttendance extends AppCompatActivity {
             }
         });
 
-        fMonthList.add("Select Month");
-        fMonthList.add("January");
-        fMonthList.add("February");
-        fMonthList.add("March");
-        fMonthList.add("April");
-        fMonthList.add("May");
-        fMonthList.add("June");
-        fMonthList.add("July");
-        fMonthList.add("August");
-        fMonthList.add("September");
-        fMonthList.add("October");
-        fMonthList.add("November");
-        fMonthList.add("December");
-        tMonthList = fMonthList;
+        fMonthList.add(0, "Month From");
+        fMonthList.add(1,"January");
+        fMonthList.add(2, "February");
+        fMonthList.add(3, "March");
+        fMonthList.add(4,"April");
+        fMonthList.add(5,"May");
+        fMonthList.add(6,"June");
+        fMonthList.add(7,"July");
+        fMonthList.add(8,"August");
+        fMonthList.add(9,"September");
+        fMonthList.add(10,"October");
+        fMonthList.add(11,"November");
+        fMonthList.add(12,"December");
+
+        tMonthList.add(0, "Month To");
+        tMonthList.add(1,"January");
+        tMonthList.add(2, "February");
+        tMonthList.add(3, "March");
+        tMonthList.add(4,"April");
+        tMonthList.add(5,"May");
+        tMonthList.add(6,"June");
+        tMonthList.add(7,"July");
+        tMonthList.add(8,"August");
+        tMonthList.add(9,"September");
+        tMonthList.add(10,"October");
+        tMonthList.add(11,"November");
+        tMonthList.add(12,"December");
 
 
         year_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
