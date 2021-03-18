@@ -15,12 +15,42 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
-            <Spinner
-                android:id="@+id/sub_spinner"
+            <TextView
                 android:layout_width="match_parent"
-                android:background="@drawable/border"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"/>
+                android:textAlignment="center"
+                android:text="Select subject to view report"
+                android:textSize="25dp"
+                android:layout_marginBottom="50dp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/border"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/sub_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_down"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="10dp"/>
+
+            </RelativeLayout>
             <Button
                 android:id="@+id/btn_next1"
                 android:layout_height="wrap_content"

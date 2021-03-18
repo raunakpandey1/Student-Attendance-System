@@ -7,22 +7,43 @@
     android:gravity="center"
     tools:context=".AttendanceSubject">
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Select Subject"
-        android:textColor="#000000"
-        android:textSize="30sp"
+        android:textAlignment="center"
+        android:text="Select Subject to take \nattendance"
+        android:textSize="25dp"
         android:layout_marginBottom="50dp"/>
-
-    <Spinner
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:gravity="center"
         android:layout_margin="20dp"
-        android:background="@drawable/border"/>
+        android:background="@drawable/border"
+        android:orientation="horizontal">
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:spinnerMode="dropdown" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_down"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="10dp"/>
+
+    </RelativeLayout>
     <Button
         android:id="@+id/subject_button"
         android:layout_height="wrap_content"
