@@ -157,9 +157,24 @@ public class TakeAttendance extends AppCompatActivity {
                         String absentstudentID = "";
                         for (int i = 0; i < takeattenAdapter.absentList.size(); i++) {
                             absentstudentID = takeattenAdapter.absentList.get(i);
+                            final String finalAbsentstudentID = absentstudentID;
                             dataRef.child(absentstudentID).child("absent").push().setValue(datetime);
                             dataRef.child(absentstudentID).child("total").push().setValue(datetime);
                             stdRef.child(absentstudentID).child("tattendance").push().setValue(datetime);
+                            dataRef.child(presentstudentID).child("id").setValue(absentstudentID);
+
+                            stdRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    dataRef.child(finalAbsentstudentID).child("name").setValue(snapshot.child(finalAbsentstudentID).child("name").getValue());
+                                    dataRef.child(finalAbsentstudentID).child("roll").setValue(snapshot.child(finalAbsentstudentID).child("roll").getValue());
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
 
 

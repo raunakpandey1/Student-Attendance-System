@@ -50,18 +50,43 @@
         android:layout_marginTop="25dp"
         android:autofillHints=""
         tools:ignore="TextFields" />
-    <Spinner
-        android:id="@+id/enter_roll"
-        android:layout_below="@+id/enter_email"
-        android:layout_height="wrap_content"
+    <RelativeLayout
         android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/border"/>
+        android:id="@+id/enter_roll_layout"
+        android:layout_below="@+id/enter_email"
+        android:background="@drawable/border"
+        android:orientation="horizontal">
+        <Spinner
+            android:id="@+id/enter_roll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:spinnerMode="dropdown" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_down"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="10dp"/>
+
+    </RelativeLayout>
+
     <EditText
         android:id="@+id/enter_div"
         android:hint="@string/division"
-        android:layout_below="@+id/enter_roll"
+        android:layout_below="@+id/enter_roll_layout"
         android:layout_height="wrap_content"
         android:layout_width="300dp"
         android:singleLine="true"
