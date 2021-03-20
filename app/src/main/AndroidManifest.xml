@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StudMonthAttendance"></activity>
+        <activity android:name=".studentSubjectSelect" />
+        <activity android:name=".StudMonthAttendance" />
         <activity android:name=".SubjectYear" />
         <activity android:name=".MonthAttendance" />
         <activity android:name=".seeAttendanceSubject" />

@@ -26,9 +26,9 @@ public class seeAttendanceSubject extends AppCompatActivity {
     Button button;
     FirebaseDatabase database;
     DatabaseReference databaseRef;
-    List<String> SubjectList = new ArrayList<>();
+    List<String> yearList = new ArrayList<>();
     ArrayAdapter<String> adapter;
-    String Subject = "Graphics";
+    String year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class seeAttendanceSubject extends AppCompatActivity {
         setContentView(R.layout.activity_see_attendance_subject);
 
         database = FirebaseDatabase.getInstance();
-        databaseRef = database.getReference("subjects");
+        databaseRef = database.getReference("year");
 
         spinner = findViewById(R.id.spinnerSub);
         button = findViewById(R.id.subject_button_see);
@@ -45,7 +45,7 @@ public class seeAttendanceSubject extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Subject = SubjectList.get(position);
+                year = parent.getSelectedItem().toString();
             }
 
             @Override
@@ -57,8 +57,9 @@ public class seeAttendanceSubject extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent MainIntent = new Intent(seeAttendanceSubject.this, Posts.class);
-                MainIntent.putExtra("sub",Subject);
+                Intent MainIntent = new Intent(seeAttendanceSubject.this, studentSubjectSelect.class);
+                MainIntent.putExtra("id", "1234");
+                MainIntent.putExtra("Year",year);
                 startActivity(MainIntent);
             }
         });
@@ -71,12 +72,12 @@ public class seeAttendanceSubject extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    SubjectList.clear();
+                    yearList.clear();
                     for(DataSnapshot subSnapshot: snapshot.getChildren()){
                         String subj = subSnapshot.getKey();
-                        SubjectList.add(subj);
+                        yearList.add(subj);
                     }
-                    adapter = new ArrayAdapter<String>(seeAttendanceSubject.this,android.R.layout.simple_spinner_dropdown_item, SubjectList);
+                    adapter = new ArrayAdapter<String>(seeAttendanceSubject.this,android.R.layout.simple_spinner_dropdown_item, yearList);
                     spinner.setAdapter(adapter);
                 }
             }

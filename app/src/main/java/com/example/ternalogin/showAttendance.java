@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ternalogin.model.post;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +35,8 @@ public class showAttendance extends AppCompatActivity {
     DatabaseReference stdRef, subRef;
 
     String presen, tota, percen;
+    String sPresent, sTotal;
+    float fo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +57,37 @@ public class showAttendance extends AppCompatActivity {
         presentspinner = findViewById(R.id.spinner1);
         absentspinner = findViewById(R.id.spinner2);
 
-        String id = getIntent().getStringExtra("id");
-        final String Subj = getIntent().getStringExtra("Sub");
+       // id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String Subj = getIntent().getStringExtra("subject");
+        final String Year = getIntent().getStringExtra("years");
+        final String month = getIntent().getStringExtra("month");
+        final String id = getIntent().getStringExtra("id");
 
         database = FirebaseDatabase.getInstance();
         stdRef = database.getReference("Students").child(id);
+        subRef = database.getReference("year").child(Year).child(Subj).child(month).child(id);
+
+        subject.setText(Subj.toUpperCase());
+        subRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                sPresent = String.valueOf(snapshot.child("present").getChildrenCount());
+                sTotal = String.valueOf(snapshot.child("total").getChildrenCount());
+                fo = ((Float.parseFloat(sPresent)/Float.parseFloat(sTotal))*100);
+                fo = (float) (Math.round(fo*100.0)/100.0);
+                String sPercent = String.valueOf(fo);
+
+                present.setText(sPresent);
+                total.setText(sTotal);
+                percent.setText(sPercent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         stdRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -87,31 +117,10 @@ public class showAttendance extends AppCompatActivity {
             }
         });
 
-        subRef = database.getReference("subjects").child(Subj).child(id);
-        subRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
 
-                    String spresent = String.valueOf(snapshot.child("present").getChildrenCount());
-                    String stotal = String.valueOf(snapshot.child("total").getChildrenCount());
-                    float fo = ((Float.parseFloat(spresent)/Float.parseFloat(stotal))*100);
-                    fo = (float) (Math.round(fo*100.0)/100.0);
-                    String spercent = String.valueOf(fo);
-                    subject.setText(Subj.toUpperCase());
-                    present.setText(spresent);
-                    total.setText(stotal);
-                    percent.setText(spercent);
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        subRef.child("present").addValueEventListener(new ValueEventListener() {
+       subRef.child("present").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
@@ -120,6 +129,11 @@ public class showAttendance extends AppCompatActivity {
                     for (DataSnapshot preSnapshot : snapshot.getChildren()){
                         PresentList.add(preSnapshot.getValue().toString());
                     }
+                    adapter1 = new ArrayAdapter<String>(showAttendance.this,android.R.layout.simple_spinner_dropdown_item, PresentList);
+                    presentspinner.setAdapter(adapter1);
+                }else{
+                    PresentList.clear();
+                    PresentList.add("See Present List");
                     adapter1 = new ArrayAdapter<String>(showAttendance.this,android.R.layout.simple_spinner_dropdown_item, PresentList);
                     presentspinner.setAdapter(adapter1);
                 }
@@ -140,6 +154,11 @@ public class showAttendance extends AppCompatActivity {
                     for (DataSnapshot preSnapshot : snapshot.getChildren()){
                         AbsentList.add(preSnapshot.getValue().toString());
                     }
+                    adapter2 = new ArrayAdapter<String>(showAttendance.this,android.R.layout.simple_spinner_dropdown_item, AbsentList);
+                    absentspinner.setAdapter(adapter2);
+                }else{
+                    AbsentList.clear();
+                    AbsentList.add("See Absent List");
                     adapter2 = new ArrayAdapter<String>(showAttendance.this,android.R.layout.simple_spinner_dropdown_item, AbsentList);
                     absentspinner.setAdapter(adapter2);
                 }

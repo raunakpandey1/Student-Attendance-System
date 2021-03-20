@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -31,10 +32,10 @@ public class studentProfile extends AppCompatActivity {
     Spinner spinner;
     FirebaseDatabase database;
     DatabaseReference stdRef, stdID, databaseRef;
-    List<String> SubjectList = new ArrayList<>();;
+    List<String> yearList = new ArrayList<>();;
     ArrayAdapter<String> adapter;
     private TextView Sname,Sdept,Sroll,Semail;
-    String Subject = "Graphics";
+    String Year = "2020";
     String StudentID="";
 
     @Override
@@ -46,7 +47,7 @@ public class studentProfile extends AppCompatActivity {
         String CurrentUserId = mAuth.getCurrentUser().getUid();
         database = FirebaseDatabase.getInstance();
         stdID = database.getReference("studentID").child(CurrentUserId);
-        databaseRef = database.getReference("subjects");
+        databaseRef = database.getReference("year");
         stdRef = database.getReference().child("Students");
 
         imgbutton1 = findViewById(R.id.fac_toolbar_logout);
@@ -61,7 +62,8 @@ public class studentProfile extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Subject = SubjectList.get(position);
+                Year = yearList.get(position);
+                Toast.makeText(studentProfile.this, Year, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -74,9 +76,9 @@ public class studentProfile extends AppCompatActivity {
         SSbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent MainIntent = new Intent(studentProfile.this, showAttendance.class);
+                Intent MainIntent = new Intent(studentProfile.this, studentSubjectSelect.class);
                 MainIntent.putExtra("id", StudentID);
-                MainIntent.putExtra("Sub", Subject);
+                MainIntent.putExtra("Year", Year);
                 startActivity(MainIntent);
             }
         });
@@ -140,12 +142,12 @@ public class studentProfile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    SubjectList.clear();
+                    yearList.clear();
                     for(DataSnapshot subSnapshot: snapshot.getChildren()){
-                        String subj = subSnapshot.getKey();
-                        SubjectList.add(subj);
+                        String years = subSnapshot.getKey();
+                        yearList.add(years);
                     }
-                    adapter = new ArrayAdapter<String>(studentProfile.this,android.R.layout.simple_spinner_dropdown_item, SubjectList);
+                    adapter = new ArrayAdapter<String>(studentProfile.this,android.R.layout.simple_spinner_dropdown_item, yearList);
                     spinner.setAdapter(adapter);
                 }
             }
