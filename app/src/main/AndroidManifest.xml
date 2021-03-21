@@ -14,6 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TASelectYear"></activity>
+        <activity android:name=".facultySelectSubject" />
         <activity android:name=".studentSubjectSelect" />
         <activity android:name=".StudMonthAttendance" />
         <activity android:name=".SubjectYear" />

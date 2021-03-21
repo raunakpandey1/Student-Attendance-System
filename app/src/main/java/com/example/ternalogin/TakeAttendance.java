@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ternalogin.adapter.takeattenAdapter;
 import com.example.ternalogin.model.student;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +36,7 @@ public class TakeAttendance extends AppCompatActivity {
     RecyclerView recyclerView;
     Toolbar toolbar;
     String datetime = "";
-    String year = "";
+    String year = "", Year;
     String month = "";
     String Sub;
 
@@ -52,6 +53,7 @@ public class TakeAttendance extends AppCompatActivity {
         recyclerView = findViewById(R.id.at_recycler_view);
         StudentList = new ArrayList<>();
         Sub = getIntent().getStringExtra("sub");
+        Year = getIntent().getStringExtra("year");
         toolbar = findViewById(R.id.at_mainToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -128,7 +130,7 @@ public class TakeAttendance extends AppCompatActivity {
                         datetime = simpleDateFormat.format(calendar.getTime());
                         year = yearFormat.format(calendar.getTime());
                         month = monthFormat.format(calendar.getTime());
-                        dataRef = database.getReference("year").child(year).child(Sub).child(month);
+                        dataRef = database.getReference("year").child(Year).child(Sub).child(month);
 
                         String presentstudentID = "";
                         for (int i = 0; i < takeattenAdapter.presentList.size(); i++) {

@@ -21,50 +21,53 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class seeAttendanceSubject extends AppCompatActivity {
+public class TASelectYear extends AppCompatActivity {
 
     Spinner spinner;
     Button button;
     FirebaseDatabase database;
     DatabaseReference databaseRef;
-    List<String> yearList = new ArrayList<>();
+    List<String> SubjectList = new ArrayList<>();;
     ArrayAdapter<String> adapter;
-    String year;
+    String year = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_see_attendance_subject);
+        setContentView(R.layout.activity_t_a_select_year);
 
         database = FirebaseDatabase.getInstance();
-        databaseRef = database.getReference("year");
+        databaseRef = database.getReference("subjects");
 
-        spinner = findViewById(R.id.spinnerSub);
-        button = findViewById(R.id.subject_button_see);
+        spinner = findViewById(R.id.spinner);
+        button = findViewById(R.id.subject_button);
 
         RetrieveData();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 year = parent.getSelectedItem().toString();
-                Toast.makeText(seeAttendanceSubject.this, year, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TASelectYear.this, year, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
 
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                Intent MainIntent = new Intent(seeAttendanceSubject.this, facultySelectSubject.class);
-                MainIntent.putExtra("Year",year);
+
+                Intent MainIntent = new Intent(TASelectYear.this, AttendanceSubject.class);
+                MainIntent.putExtra("year",year);
                 startActivity(MainIntent);
+
             }
         });
-
     }
 
     private void RetrieveData() {
@@ -73,18 +76,19 @@ public class seeAttendanceSubject extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    yearList.clear();
+                    SubjectList.clear();
                     for(DataSnapshot subSnapshot: snapshot.getChildren()){
                         String subj = subSnapshot.getKey();
-                        yearList.add(subj);
+                        SubjectList.add(subj);
                     }
-                    adapter = new ArrayAdapter<String>(seeAttendanceSubject.this,android.R.layout.simple_spinner_dropdown_item, yearList);
+                    adapter = new ArrayAdapter<String>(TASelectYear.this,android.R.layout.simple_spinner_dropdown_item, SubjectList);
                     spinner.setAdapter(adapter);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.example.ternalogin;
+package com.example.ternalogin.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,17 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ternalogin.R;
 import com.example.ternalogin.model.student;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class takeattenAdapter extends RecyclerView.Adapter<takeattenAdapter.takeattenViewholder> {

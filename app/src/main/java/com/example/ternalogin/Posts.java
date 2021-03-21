@@ -9,11 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.ternalogin.adapter.PostsAdapter;
 import com.example.ternalogin.model.post;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Posts extends AppCompatActivity implements RecyclerViewClickInterface{
@@ -36,7 +38,7 @@ public class Posts extends AppCompatActivity implements RecyclerViewClickInterfa
     ImageButton imgbutton;
 
     List<post> PostList = new ArrayList<>();
-    String Subjec;
+    String Subjec, Year, month;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,8 @@ public class Posts extends AppCompatActivity implements RecyclerViewClickInterfa
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Students");
 
-        Subjec = getIntent().getStringExtra("sub");
+        Subjec = getIntent().getStringExtra("Subject");
+        Year = getIntent().getStringExtra("Years");
 
         //database
         mAuth = FirebaseAuth.getInstance();
@@ -59,7 +62,10 @@ public class Posts extends AppCompatActivity implements RecyclerViewClickInterfa
         dataRef = database.getReference("Students");
 
 
-       showList();
+        showList();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
+        month = monthFormat.format(calendar.getTime());
 
        imgbutton.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -109,7 +115,9 @@ public class Posts extends AppCompatActivity implements RecyclerViewClickInterfa
 
          Intent MainIntent = new Intent(Posts.this, showAttendance.class);
          MainIntent.putExtra("id",PostList.get(position).getId());
-         MainIntent.putExtra("Sub",Subjec);
+         MainIntent.putExtra("subject",Subjec);
+         MainIntent.putExtra("years",Year);
+         MainIntent.putExtra("month", month);
          startActivity(MainIntent);
     }
 

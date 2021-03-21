@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         cdTA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent MainIntent = new Intent(MainActivity.this, AttendanceSubject.class);
+                Intent MainIntent = new Intent(MainActivity.this, TASelectYear.class);
                 startActivity(MainIntent);
             }
         });

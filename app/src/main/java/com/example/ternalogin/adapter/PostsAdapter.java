@@ -1,6 +1,5 @@
-package com.example.ternalogin;
+package com.example.ternalogin.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ternalogin.R;
+import com.example.ternalogin.RecyclerViewClickInterface;
 import com.example.ternalogin.model.post;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;

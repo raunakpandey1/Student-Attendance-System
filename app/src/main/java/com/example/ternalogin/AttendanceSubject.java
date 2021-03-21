@@ -28,7 +28,7 @@ public class AttendanceSubject extends AppCompatActivity {
     DatabaseReference databaseRef;
     List<String> SubjectList = new ArrayList<>();;
     ArrayAdapter<String> adapter;
-    String Subject = "";
+    String Subject = "", year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class AttendanceSubject extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         databaseRef = database.getReference("subjects");
 
+        year = getIntent().getStringExtra("year");
         spinner = findViewById(R.id.spinner);
         button = findViewById(R.id.subject_button);
 
@@ -45,7 +46,7 @@ public class AttendanceSubject extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Subject = SubjectList.get(position);
+                Subject = parent.getSelectedItem().toString();
 
             }
 
@@ -61,9 +62,10 @@ public class AttendanceSubject extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                        Intent MainIntent = new Intent(AttendanceSubject.this, TakeAttendance.class);
-                        MainIntent.putExtra("sub",Subject);
-                        startActivity(MainIntent);
+                Intent MainIntent = new Intent(AttendanceSubject.this, TakeAttendance.class);
+                MainIntent.putExtra("sub",Subject);
+                MainIntent.putExtra("year",year);
+                startActivity(MainIntent);
 
             }
         });
@@ -72,7 +74,7 @@ public class AttendanceSubject extends AppCompatActivity {
 
     private void RetrieveData() {
 
-        databaseRef.addValueEventListener(new ValueEventListener() {
+        databaseRef.child(year).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
