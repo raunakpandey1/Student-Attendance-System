@@ -24,7 +24,7 @@ import java.util.List;
 
 public class showAttendance extends AppCompatActivity {
 
-    TextView name, branch, email, div, roll, tpresent, ttotal, tpercentage, subject, present , total, percent;
+    TextView current_month,name, branch, email, div, roll, tpresent, ttotal, tpercentage, subject, present , total, percent;
     Spinner presentspinner, absentspinner;
     List<String> PresentList = new ArrayList<>();
     List<String> AbsentList = new ArrayList<>();
@@ -56,6 +56,7 @@ public class showAttendance extends AppCompatActivity {
         percent = findViewById(R.id.percentage);
         presentspinner = findViewById(R.id.spinner1);
         absentspinner = findViewById(R.id.spinner2);
+        current_month = findViewById(R.id.current_month);
 
        // id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final String Subj = getIntent().getStringExtra("subject");
@@ -68,6 +69,7 @@ public class showAttendance extends AppCompatActivity {
         subRef = database.getReference("year").child(Year).child(Subj).child(month).child(id);
 
         subject.setText(Subj.toUpperCase());
+        current_month.setText(month + " (Current Month)");
         subRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
