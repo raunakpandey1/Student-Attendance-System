@@ -6,10 +6,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.ternalogin.adapter.StudentMonthAdapter;
 import com.example.ternalogin.model.monModel;
+import com.example.ternalogin.studentside.studentProfile;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +27,7 @@ public class StudMonthAttendance extends AppCompatActivity {
 
     RecyclerView recyclerView;
     Toolbar toolbar;
+    Button button_def;
     FirebaseDatabase database;
     DatabaseReference databaseRef, newRef;
     List<String> monthList = new ArrayList<>();
@@ -39,6 +44,7 @@ public class StudMonthAttendance extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stud_month_attendance);
 
+        button_def = findViewById(R.id.button_def);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         toolbar = findViewById(R.id.mainToolbar);
@@ -132,6 +138,15 @@ public class StudMonthAttendance extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+        button_def.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent MainIntent = new Intent(StudMonthAttendance.this, showDefaulterStudent.class);
+                MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(MainIntent);
             }
         });
 
