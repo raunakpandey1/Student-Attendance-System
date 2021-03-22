@@ -145,7 +145,6 @@ public class StudMonthAttendance extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent MainIntent = new Intent(StudMonthAttendance.this, showDefaulterStudent.class);
-                MainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(MainIntent);
             }
         });

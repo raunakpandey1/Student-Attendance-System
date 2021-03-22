@@ -1,36 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".StudMonthAttendance">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/mainToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient1"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
     <RelativeLayout
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/mainToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gradient1"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-        <FrameLayout
-            android:id="@+id/frame_layout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/mainToolbar">
+            android:layout_above="@+id/button_l_layout"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
         <LinearLayout
             android:id="@+id/button_l_layout"
             android:layout_width="match_parent"
@@ -41,21 +36,16 @@
             <Button
                 android:id="@+id/button_def"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginTop="5dp"
                 android:textSize="15sp"
                 android:textColor="#ffffff"
                 android:background="@drawable/button_background_color"
-                android:text="Filter defaulter dtudent"
+                android:text="View Defaulter List"
                 />
-
         </LinearLayout>
     </RelativeLayout>
-
-
-
-
-</androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>

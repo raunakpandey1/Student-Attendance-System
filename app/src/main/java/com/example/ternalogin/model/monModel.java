@@ -55,4 +55,12 @@ public class monModel {
     public void setTotal(int total) {
         this.total = total;
     }
+
+    public float getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(float percentage) {
+        this.percentage = percentage;
+    }
 }
