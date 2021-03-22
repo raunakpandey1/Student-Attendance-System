@@ -33,11 +33,13 @@ public class StudMonthAttendance extends AppCompatActivity {
     List<String> monthList = new ArrayList<>();
     List<monModel> studList = new ArrayList<>();
     List<String> idsList = new ArrayList<>();
+    public static List<monModel> defaulterList = new ArrayList<>();
     int[] preArr = new int[100];
     int[] totArr = new int[100];
     String Subject,Year;
     int fMonth, tMonth,i;
-    int j;
+    int j,k;
+    float Percent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,7 @@ public class StudMonthAttendance extends AppCompatActivity {
         newRef = database.getReference("year");
 
         newRef.child(Year).child(Subject);
+        defaulterList.clear();
 
         for(i=fMonth;i<=tMonth;i++){
             databaseRef.child(Year).child(Subject).child(monthList.get(i)).addValueEventListener(new ValueEventListener() {
@@ -116,17 +119,24 @@ public class StudMonthAttendance extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    // j=0;
+                     j=0;
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         String id = (String) dataSnapshot.child("id").getValue();
                         String name = (String) dataSnapshot.child("name").getValue();
                         String roll = (String) dataSnapshot.child("roll").getValue();
+                        int Present = preArr[j];
+                        int Total = totArr[j];
+                        Percent = (((float)Present/(float)Total)*100);
+                        Percent = (float) (Math.round(Percent*100.0)/100.0);
                         // long present = dataSnapshot.child("present").getChildrenCount();
                         // long total = dataSnapshot.child("total").getChildrenCount();
                         // preArr[j]= preArr[j] + (int)present;
                         // totArr[j]= totArr[j] + (int)total;
-                        // j++;
-                        monModel monmodel = new monModel(id, name, roll, 0, 0,0);
+                        j++;
+                        monModel monmodel = new monModel(id, name, roll, Present, Total,Percent);
+                        if(Percent<75){
+                            defaulterList.add(monmodel);
+                        }
                         studList.add(monmodel);
                     }
                     StudentMonthAdapter studentMonthAdapter = new StudentMonthAdapter(studList, preArr, totArr);

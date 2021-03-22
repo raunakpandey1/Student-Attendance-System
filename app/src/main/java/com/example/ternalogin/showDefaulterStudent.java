@@ -31,7 +31,7 @@ public class showDefaulterStudent extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
 
-        ShowDefaulterAdapter showDefaulterAdapter = new ShowDefaulterAdapter(StudentMonthAdapter.defaulterList);
+        ShowDefaulterAdapter showDefaulterAdapter = new ShowDefaulterAdapter(StudMonthAttendance.defaulterList);
         recyclerView.setLayoutManager(new LinearLayoutManager(showDefaulterStudent.this));
         showDefaulterAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(showDefaulterAdapter);
