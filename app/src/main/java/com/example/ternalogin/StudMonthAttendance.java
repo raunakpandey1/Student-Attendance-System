@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -53,7 +54,7 @@ public class StudMonthAttendance extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("");
+
 
         Subject = getIntent().getStringExtra("subject");
         Year = getIntent().getStringExtra("years");
@@ -72,6 +73,7 @@ public class StudMonthAttendance extends AppCompatActivity {
         monthList.add(10,"October");
         monthList.add(11,"November");
         monthList.add(12,"December");
+        getSupportActionBar().setTitle(monthList.get(fMonth)+ " to "+ monthList.get(tMonth));
         studList.clear();
         database = FirebaseDatabase.getInstance();
         databaseRef = database.getReference("year");
@@ -159,5 +161,12 @@ public class StudMonthAttendance extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
