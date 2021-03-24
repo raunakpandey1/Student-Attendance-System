@@ -18,19 +18,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ternalogin.adapter.StudentMonthAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class showDefaulterStudent extends AppCompatActivity {
 
     RecyclerView recyclerView;
     Toolbar toolbar;
-    Button button_def;
+    Button send_msg;
+    String Subject, Year, faculty;
+    FirebaseDatabase database;
+    DatabaseReference subRef, msgRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_defaulter_student);
 
-        button_def = findViewById(R.id.button_def);
+        send_msg = findViewById(R.id.send_msg);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         toolbar = findViewById(R.id.mainToolbar);
@@ -38,14 +49,30 @@ public class showDefaulterStudent extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Defaulter Students");
+        Subject = getIntent().getStringExtra("subject");
+        Year = getIntent().getStringExtra("year");
 
+        database = FirebaseDatabase.getInstance();
+        subRef = database.getReference("subjects").child(Year).child(Subject);
+        msgRef = database.getReference("Message");
+        subRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                faculty = snapshot.child("teacher").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         ShowDefaulterAdapter showDefaulterAdapter = new ShowDefaulterAdapter(StudMonthAttendance.defaulterList);
         recyclerView.setLayoutManager(new LinearLayoutManager(showDefaulterStudent.this));
         showDefaulterAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(showDefaulterAdapter);
 
-        button_def.setOnClickListener(new View.OnClickListener() {
+        send_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final AlertDialog dialog=new AlertDialog.Builder(showDefaulterStudent.this).create();
@@ -70,11 +97,26 @@ public class showDefaulterStudent extends AppCompatActivity {
                         String Message = messageHere.getText().toString();
                         if(TextUtils.isEmpty(Message)){
                             Toast.makeText(showDefaulterStudent.this, "No message entered...", Toast.LENGTH_SHORT).show();
-                        }else{
-                            //
                         }
+                     /*   else{
+                            Calendar calendar = Calendar.getInstance();
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+                            SimpleDateFormat yearFormat = new SimpleDateFormat("dd-MM-yyyy");
+                            String dateFormat = simpleDateFormat.format(calendar.getTime());
+                            String keyDate = yearFormat.format(calendar.getTime());
+
+                            for(int i=0;i<StudMonthAttendance.defaulterList.size();i++){
+                                String percent = String.valueOf(StudMonthAttendance.defaulterList.get(i).getPercentage());
+                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(Message);
+                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(Subject);
+                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(dateFormat);
+                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(percent);
+                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(faculty);
+                            }
+                        }  */
                     }
                 });
+                dialog.show();
             }
         });
 

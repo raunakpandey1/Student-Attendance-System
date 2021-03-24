@@ -157,6 +157,8 @@ public class StudMonthAttendance extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent MainIntent = new Intent(StudMonthAttendance.this, showDefaulterStudent.class);
+                MainIntent.putExtra("subject", Subject);
+                MainIntent.putExtra("year", Year);
                 startActivity(MainIntent);
             }
         });
