@@ -12,10 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+        <EditText
+            android:id="@+id/messageHere"
             android:textColor="@color/colorPrimary"
             android:layout_width="match_parent"
-            android:padding="5dp"
+            android:padding="10dp"
             android:layout_height="match_parent"
             android:background="@drawable/border"
             android:hint="Enter message here"
@@ -27,38 +28,15 @@
         android:layout_marginTop="15dp"
         android:weightSum="3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/TotalStudentTV"
+            android:id="@+id/subjectName"
             android:textSize="15sp"
-            android:textAlignment="center"
-            android:text="Total Student"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+            android:text="Note: faculty name, student attendance percentage and subject already included in the message"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/presentStudentTV"
-            android:textSize="15sp"
-            android:textAlignment="center"
-            android:text="Present"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/absentStudentTV"
-            android:textSize="15sp"
-            android:textAlignment="center"
-            android:text="Absent"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
-
-
-
-
-
     </LinearLayout>
 
     <LinearLayout
