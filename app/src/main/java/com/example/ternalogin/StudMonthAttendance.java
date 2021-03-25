@@ -159,6 +159,7 @@ public class StudMonthAttendance extends AppCompatActivity {
                 Intent MainIntent = new Intent(StudMonthAttendance.this, showDefaulterStudent.class);
                 MainIntent.putExtra("subject", Subject);
                 MainIntent.putExtra("year", Year);
+                MainIntent.putExtra("monthRange", monthList.get(fMonth)+ " to "+ monthList.get(tMonth));
                 startActivity(MainIntent);
             }
         });

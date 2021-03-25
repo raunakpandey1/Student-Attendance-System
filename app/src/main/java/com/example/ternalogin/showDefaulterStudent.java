@@ -32,7 +32,7 @@ public class showDefaulterStudent extends AppCompatActivity {
     RecyclerView recyclerView;
     Toolbar toolbar;
     Button send_msg;
-    String Subject, Year, faculty;
+    String Subject, Year, faculty, monthRange;
     FirebaseDatabase database;
     DatabaseReference subRef, msgRef;
 
@@ -51,6 +51,7 @@ public class showDefaulterStudent extends AppCompatActivity {
         getSupportActionBar().setTitle("Defaulter Students");
         Subject = getIntent().getStringExtra("subject");
         Year = getIntent().getStringExtra("year");
+        monthRange = getIntent().getStringExtra("monthRange");
 
         database = FirebaseDatabase.getInstance();
         subRef = database.getReference("subjects").child(Year).child(Subject);
@@ -79,7 +80,7 @@ public class showDefaulterStudent extends AppCompatActivity {
                 View view= LayoutInflater.from(showDefaulterStudent.this).inflate(R.layout.messagepopup,null);
                 final EditText messageHere;
                 Button cancelBtn, confirmBtn;
-                messageHere = findViewById(R.id.messageHere);
+                messageHere = view.findViewById(R.id.messageHere);
                 cancelBtn=view.findViewById(R.id.canclebtn);
                 confirmBtn=view.findViewById(R.id.confirmbtn);
                 dialog.setCancelable(true);
@@ -100,18 +101,21 @@ public class showDefaulterStudent extends AppCompatActivity {
                         }else{
                             Calendar calendar = Calendar.getInstance();
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
-                            SimpleDateFormat yearFormat = new SimpleDateFormat("dd-MM-yyyy");
+                            SimpleDateFormat yearFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss-a");
                             String dateFormat = simpleDateFormat.format(calendar.getTime());
                             String keyDate = yearFormat.format(calendar.getTime());
 
                             for(int i=0;i<StudMonthAttendance.defaulterList.size();i++){
                                 String percent = String.valueOf(StudMonthAttendance.defaulterList.get(i).getPercentage());
-                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(Message);
-                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(Subject);
-                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(dateFormat);
-                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(percent);
-                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(faculty);
+                                msgModel msgmodel = new msgModel(Message, Subject, dateFormat, percent, faculty, monthRange);
+                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(msgmodel);
+                               // msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(Subject);
+                               // msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(dateFormat);
+                               // msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(percent);
+                               // msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(faculty);
                             }
+                            dialog.dismiss();
+                            Toast.makeText(showDefaulterStudent.this, "Message send...", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
