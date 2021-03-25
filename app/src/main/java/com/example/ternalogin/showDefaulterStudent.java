@@ -97,8 +97,7 @@ public class showDefaulterStudent extends AppCompatActivity {
                         String Message = messageHere.getText().toString();
                         if(TextUtils.isEmpty(Message)){
                             Toast.makeText(showDefaulterStudent.this, "No message entered...", Toast.LENGTH_SHORT).show();
-                        }
-                     /*   else{
+                        }else{
                             Calendar calendar = Calendar.getInstance();
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
                             SimpleDateFormat yearFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -113,7 +112,7 @@ public class showDefaulterStudent extends AppCompatActivity {
                                 msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(percent);
                                 msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(faculty);
                             }
-                        }  */
+                        }
                     }
                 });
                 dialog.show();
