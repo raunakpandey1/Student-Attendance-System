@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.ternalogin.Login_Activity;
 import com.example.ternalogin.R;
+import com.example.ternalogin.showMessage;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +31,7 @@ public class studentProfile extends AppCompatActivity {
 
     private ImageButton imgbutton1;
     private FirebaseAuth mAuth;
-    private Button SSbutton;
+    private Button SSbutton, show_msg_button;
     Spinner spinner;
     FirebaseDatabase database;
     DatabaseReference stdRef, stdID, databaseRef;
@@ -59,6 +60,7 @@ public class studentProfile extends AppCompatActivity {
         Sdept = findViewById(R.id.teach_dept);
         Sroll = findViewById(R.id.teach_sub);
         Semail = findViewById(R.id.teach_email);
+        show_msg_button = findViewById(R.id.show_msg_button);
 
         RetrieveData();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -99,6 +101,16 @@ public class studentProfile extends AppCompatActivity {
                 LoginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(LoginIntent);
                 finish();
+            }
+        });
+
+        show_msg_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(studentProfile.this, showMessage.class);
+                myIntent.putExtra("id", StudentID);
+              //  myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(myIntent);
             }
         });
 

@@ -14,10 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ternalogin.adapter.StudentMonthAdapter;
+import com.example.ternalogin.model.msgModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -108,7 +107,7 @@ public class showDefaulterStudent extends AppCompatActivity {
                             for(int i=0;i<StudMonthAttendance.defaulterList.size();i++){
                                 String percent = String.valueOf(StudMonthAttendance.defaulterList.get(i).getPercentage());
                                 msgModel msgmodel = new msgModel(Message, Subject, dateFormat, percent, faculty, monthRange);
-                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(msgmodel);
+                                msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).setValue(msgmodel);
                                // msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(Subject);
                                // msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(dateFormat);
                                // msgRef.child(StudMonthAttendance.defaulterList.get(i).getId()).child(keyDate).push().setValue(percent);

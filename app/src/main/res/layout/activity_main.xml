@@ -240,7 +240,7 @@
                             android:layout_width="match_parent"
                             android:gravity="center">
                             <ImageView
-                                android:src="@drawable/exit"
+                                android:src="@drawable/analyse"
                                 android:layout_height="70dp"
                                 android:layout_width="70dp"
                                 android:layout_gravity="center"/>
