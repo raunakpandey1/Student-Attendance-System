@@ -38,6 +38,7 @@ public class showMessage extends AppCompatActivity {
         recyclerView = findViewById(R.id.msg_recycler_view);
         database = FirebaseDatabase.getInstance();
         msgRef = FirebaseDatabase.getInstance().getReference("Message");
+        msgList.clear();
 
         msgRef.child(studentId).addValueEventListener(new ValueEventListener() {
             @Override

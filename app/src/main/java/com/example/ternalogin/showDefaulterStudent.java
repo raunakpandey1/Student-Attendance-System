@@ -100,7 +100,7 @@ public class showDefaulterStudent extends AppCompatActivity {
                         }else{
                             Calendar calendar = Calendar.getInstance();
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
-                            SimpleDateFormat yearFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss-a");
+                            SimpleDateFormat yearFormat = new SimpleDateFormat("dd-MM-yyyy-kk-mm-ss");
                             String dateFormat = simpleDateFormat.format(calendar.getTime());
                             String keyDate = yearFormat.format(calendar.getTime());
 
