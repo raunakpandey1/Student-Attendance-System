@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".showMessage"
-    android:background="@color/colorAccent">
+    android:background="#E9F0FD">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/at_mainToolbar"

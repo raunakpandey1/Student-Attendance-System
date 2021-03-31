@@ -48,7 +48,10 @@ public class showMessage extends AppCompatActivity {
                     msgList.add(msgmodel);
                 }
                 ShowMessageAdapter showMessageAdapter = new ShowMessageAdapter(msgList);
-                recyclerView.setLayoutManager(new LinearLayoutManager(showMessage.this));
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(showMessage.this);
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                recyclerView.setLayoutManager(linearLayoutManager);
                 showMessageAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(showMessageAdapter);
             }
