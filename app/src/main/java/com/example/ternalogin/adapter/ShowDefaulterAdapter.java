@@ -1,4 +1,4 @@
-package com.example.ternalogin;
+package com.example.ternalogin.adapter;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ternalogin.adapter.StudentMonthAdapter;
+import com.example.ternalogin.R;
 import com.example.ternalogin.model.monModel;
 
 import java.util.ArrayList;

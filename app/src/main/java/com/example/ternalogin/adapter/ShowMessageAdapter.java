@@ -1,4 +1,4 @@
-package com.example.ternalogin;
+package com.example.ternalogin.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ternalogin.adapter.takeattenAdapter;
+import com.example.ternalogin.R;
 import com.example.ternalogin.model.msgModel;
 
 import java.util.ArrayList;

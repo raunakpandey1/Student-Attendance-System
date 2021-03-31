@@ -2,16 +2,14 @@ package com.example.ternalogin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.ternalogin.adapter.takeattenAdapter;
+import com.example.ternalogin.adapter.ShowMessageAdapter;
 import com.example.ternalogin.model.msgModel;
-import com.example.ternalogin.model.student;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +24,7 @@ public class showMessage extends AppCompatActivity {
     RecyclerView recyclerView;
     FirebaseDatabase database;
     DatabaseReference msgRef;
+    Toolbar toolbar;
     String studentId;
     List<msgModel> msgList = new ArrayList<>();
 
@@ -36,6 +35,12 @@ public class showMessage extends AppCompatActivity {
 
         studentId = getIntent().getStringExtra("id");
         recyclerView = findViewById(R.id.msg_recycler_view);
+        toolbar = findViewById(R.id.at_mainToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Messages");
+
         database = FirebaseDatabase.getInstance();
         msgRef = FirebaseDatabase.getInstance().getReference("Message");
         msgList.clear();
