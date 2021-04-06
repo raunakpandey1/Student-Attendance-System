@@ -17,14 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DocumentActivity"></activity>
+        <activity android:name=".showMessage"></activity>
+        <activity android:name=".showDefaulterStudent" />
         <activity android:name=".TASelectYear" />
         <activity android:name=".facultySelectSubject" />
-        <activity android:name=".studentSubjectSelect" />
+        <activity android:name=".studentside.studentSubjectSelect" />
         <activity android:name=".StudMonthAttendance" />
         <activity android:name=".SubjectYear" />
         <activity android:name=".MonthAttendance" />
         <activity android:name=".seeAttendanceSubject" />
-        <activity android:name=".studentProfile" />
+        <activity android:name=".studentside.studentProfile" />
         <activity android:name=".showAttendance" />
         <activity android:name=".SplashScreen">
             <intent-filter>

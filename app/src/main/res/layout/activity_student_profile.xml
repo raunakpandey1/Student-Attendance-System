@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -81,10 +81,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="5dp"
             android:gravity="center">
 
             <Spinner
@@ -104,8 +105,18 @@
                 android:text="See Attendance"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
+        <Button
+            android:id="@+id/show_msg_button"
+            android:layout_below="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/button_background_color"
+            android:text="Message"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
+
 
     <ImageButton
         android:id="@+id/fac_toolbar_logout"

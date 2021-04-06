@@ -3,6 +3,7 @@ package com.example.ternalogin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,7 @@ public class MonthAttendance extends AppCompatActivity {
     List<String> yearList = new ArrayList<>();
     List<String> fMonthList = new ArrayList<>();
     List<String> tMonthList = new ArrayList<>();
+    private ProgressDialog loadingbar;
 
     FirebaseDatabase database;
     DatabaseReference yearRef;
@@ -46,6 +48,7 @@ public class MonthAttendance extends AppCompatActivity {
         fMonth_spinner = findViewById(R.id.fMonth_spinner);
         tMonth_spinner = findViewById(R.id.tMonth_spinner);
         btn_next = findViewById(R.id.btn_next);
+        loadingbar = new ProgressDialog(this);
 
         yearList.clear();
         fMonthList.clear();
@@ -55,6 +58,9 @@ public class MonthAttendance extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         yearRef = database.getReference("year");
+        loadingbar.setMessage("Loading...");
+        loadingbar.show();
+        loadingbar.setCanceledOnTouchOutside(true);
 
         yearRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -64,6 +70,7 @@ public class MonthAttendance extends AppCompatActivity {
                 }
                 yearAdapter = new ArrayAdapter<>(MonthAttendance.this,android.R.layout.simple_spinner_dropdown_item, yearList);
                 year_spinner.setAdapter(yearAdapter);
+                loadingbar.dismiss();
             }
 
             @Override

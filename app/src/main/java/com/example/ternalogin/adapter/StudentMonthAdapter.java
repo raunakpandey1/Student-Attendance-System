@@ -18,7 +18,7 @@ import java.util.List;
 public class StudentMonthAdapter extends RecyclerView.Adapter<StudentMonthAdapter.StudentMonthViewholder> {
 
     List<monModel> studList = new ArrayList<>();
-    public static List<monModel> defaulterList = new ArrayList<>();
+  //  public static List<monModel> defaulterList = new ArrayList<>();
     int[] preArr = new int[100];
     int[] totArr = new int[100];
     float f;
@@ -53,8 +53,10 @@ public class StudentMonthAdapter extends RecyclerView.Adapter<StudentMonthAdapte
         int total = totArr[position];
         f = (((float)present/(float)total)*100);
         f = (float) (Math.round(f*100.0)/100.0);
-        monModel monmodel = new monModel(id ,name ,roll ,present ,total, f);
-        defaulterList.add(monmodel);
+     /*   if(f<75){
+            monModel monmodel = new monModel(id ,name ,roll ,present ,total, f);
+            defaulterList.add(monmodel);
+        } */
         //String present = String.valueOf(studList.get(position).getPresent());
         //String total = String.valueOf(studList.get(position).getTotal());
         holder.setdata(name, roll, present, total, f);

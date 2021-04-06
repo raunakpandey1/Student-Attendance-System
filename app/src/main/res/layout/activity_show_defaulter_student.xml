@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".StudMonthAttendance">
+    tools:context=".showDefaulterStudent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/mainToolbar"
@@ -34,7 +34,7 @@
             android:layout_alignParentBottom="true"
             android:gravity="center">
             <Button
-                android:id="@+id/button_def"
+                android:id="@+id/send_msg"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="20dp"
@@ -44,7 +44,7 @@
                 android:textSize="15sp"
                 android:textColor="#ffffff"
                 android:background="@drawable/button_background_color"
-                android:text="View Defaulter List"
+                android:text="Send Message"
                 />
         </LinearLayout>
     </RelativeLayout>
