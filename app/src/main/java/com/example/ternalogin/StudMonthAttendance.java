@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudMonthAttendance extends AppCompatActivity {
-
+//this is student attendanece acitvity
     RecyclerView recyclerView;
     Toolbar toolbar;
     Button button_def;
