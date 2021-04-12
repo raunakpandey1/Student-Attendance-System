@@ -6,23 +6,37 @@
     tools:context=".DocumentActivity"
     android:gravity="center">
 
-    <EditText
-        android:id="@+id/editText"
+    <RelativeLayout
+        android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="Select file from storage"
-        android:textColor="#0000FF"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_marginEnd="20dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_attach"
+            android:layout_centerVertical="true"/>
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:paddingStart="30dp"
+            android:hint="Select file from storage"
+            android:textColor="#0000FF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
 
     <Button
         android:id="@+id/btn"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/relative_layout"
         android:layout_marginTop="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
