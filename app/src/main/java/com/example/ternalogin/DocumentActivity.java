@@ -24,8 +24,8 @@ import com.google.firebase.storage.UploadTask;
 
 public class DocumentActivity extends AppCompatActivity {
 
-    EditText editText;
-    Button btn;
+    EditText editText,editText1;
+    Button btn,btn1;
 
     StorageReference storageReference;
     DatabaseReference databaseReference;
@@ -110,5 +110,10 @@ public class DocumentActivity extends AppCompatActivity {
                 progressDialog.setMessage("File uploaded..." +(int)progress + "%");
             }
         });
+    }
+
+    public void btn_action(View view) {
+        startActivity(new Intent(getApplicationContext(),View_Uploaded_PDF.class));
+
     }
 }

@@ -12,7 +12,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:hint="Select file from storage"
+        android:hint="Select file from storage.."
         android:textColor="#0000FF"
         android:textSize="10sp"
         android:textStyle="bold" />
@@ -26,6 +26,19 @@
         android:text="Upload file"
         android:textSize="20sp"
         android:textColor="#0000FF"/>
+
+
+    <Button
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="130dp"
+        android:id="@+id/btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout="@+id/editText1"
+        android:text="Uploaded Files"
+        android:textColor="#0000FF"
+        android:textSize="20sp"
+        android:onClick="btn_action"/>
 
 
 </RelativeLayout>
