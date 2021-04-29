@@ -145,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.upDoc:
+                Intent intent = new Intent(MainActivity.this, DocumentActivity.class);
+                startActivity(intent);
                 Toast.makeText(this, "document", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.logout:
