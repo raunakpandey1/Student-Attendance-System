@@ -1,54 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/sky"
     android:layout_height="match_parent"
-    tools:context=".DocumentActivity"
-    android:gravity="center"
-    android:orientation="vertical">
-    <ImageView
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:src="@drawable/ic_uploadfile"
-        android:layout_marginBottom="60dp"/>
+    tools:context=".DocumentActivity">
 
-    <RelativeLayout
-        android:id="@+id/relative_layout"
-        android:layout_width="match_parent"
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_attach"
-            android:layout_centerVertical="true"/>
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:paddingStart="30dp"
-            android:hint="Select file from storage"
-            android:textColor="#0000FF"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
-
+        android:layout_marginTop="300dp"
+        android:hint="Select file from storage.."
+        android:layout_centerHorizontal="true"
+        android:textColor="#0000FF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btn"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/relative_layout"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/button_background_color"
-        android:textColor="#ffffff"
-        android:text="Upload File"/>
+        android:layout_below="@+id/editText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="110dp"
+        android:text="Upload file"
+        android:background="@drawable/custom_buttonpdf"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/btn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="87dp"
+        android:layout_marginBottom="120dp"
+        android:layout="@+id/editText1"
+        android:onClick="btn_action"
+        android:background="@drawable/custom_buttonpdf"
+        android:text="Uploaded Files"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
 
-</LinearLayout>
+</RelativeLayout>

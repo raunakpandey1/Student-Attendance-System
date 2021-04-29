@@ -1,4 +1,4 @@
-package com.example.ternalogin.model;
+package com.example.ternalogin;
 
 public class DocumentDetail {
     public String name;
