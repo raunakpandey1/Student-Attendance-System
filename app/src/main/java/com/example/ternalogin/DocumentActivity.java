@@ -8,9 +8,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -24,8 +26,9 @@ import com.google.firebase.storage.UploadTask;
 
 public class DocumentActivity extends AppCompatActivity {
 
-    EditText editText;
-    Button btn;
+    TextView textView;
+    EditText title, description;
+    Button uploadBtn, selectBtn;
 
     StorageReference storageReference;
     DatabaseReference databaseReference;
@@ -34,14 +37,17 @@ public class DocumentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
 
-        editText = findViewById(R.id.editText);
-        btn =findViewById(R.id.btn);
+        textView = findViewById(R.id.textView);
+        title =findViewById(R.id.title);
+        description =findViewById(R.id.description);
+        selectBtn =findViewById(R.id.selectBtn);
+        uploadBtn =findViewById(R.id.uploadBtn);
 
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference("DocumentPDF");
 
-        btn.setEnabled(false);
-        editText.setOnClickListener(new View.OnClickListener() {
+        uploadBtn.setEnabled(false);
+        selectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                selectPDF();
@@ -65,14 +71,22 @@ public class DocumentActivity extends AppCompatActivity {
 
         if(requestCode==12 && resultCode==RESULT_OK && data!=null && data.getData()!=null)
         {
-            btn.setEnabled(true);
-            editText.setText(data.getDataString().substring(data.getDataString().lastIndexOf("/")+1));
+            uploadBtn.setEnabled(true);
+            textView.setText(data.getDataString().substring(data.getDataString().lastIndexOf("/")+1));
 
-            btn.setOnClickListener(new View.OnClickListener() {
+            uploadBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    uploadPDFFileFirebase(data.getData());
+                    String Title = title.getText().toString();
+                    String Description = description.getText().toString();
+
+                    if(TextUtils.isEmpty(Title) || TextUtils.isEmpty(Description)){
+                        Toast.makeText(DocumentActivity.this, "Please enter title and description", Toast.LENGTH_SHORT).show();
+                    }else{
+                        uploadPDFFileFirebase(data.getData());
+                    }
+
                 }
             });
 
@@ -94,10 +108,10 @@ public class DocumentActivity extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                         Task<Uri> uriTask =taskSnapshot.getStorage().getDownloadUrl();
-                        while (!uriTask.isComplete());
+                        while(!uriTask.isComplete());
                         Uri uri =uriTask.getResult();
 
-                        DocumentDetail documentDetail = new DocumentDetail(editText.getText().toString(), uri.toString());
+                        DocumentDetail documentDetail = new DocumentDetail(textView.getText().toString(), uri.toString());
                         databaseReference.child(databaseReference.push().getKey()).setValue(documentDetail);
                         Toast.makeText(DocumentActivity.this,"File upload", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();

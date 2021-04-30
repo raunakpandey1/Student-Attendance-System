@@ -31,7 +31,7 @@ public class TakeAttendance extends AppCompatActivity {
 
     List<student> StudentList = new ArrayList<>();
     FirebaseDatabase database;
-    DatabaseReference dataRef, stdRef;
+    DatabaseReference dataRef, stdRef, allSubRef;
     //TextView Subview;
     Button submitButton;
     RecyclerView recyclerView;
@@ -132,6 +132,7 @@ public class TakeAttendance extends AppCompatActivity {
                         year = yearFormat.format(calendar.getTime());
                         month = monthFormat.format(calendar.getTime());
                         dataRef = database.getReference("year").child(Year).child(Sub).child(month);
+                        allSubRef = database.getReference("year").child(Year).child("All_Subject").child(month);
 
                         String presentstudentID = "";
                         for (int i = 0; i < takeattenAdapter.presentList.size(); i++) {
@@ -139,15 +140,23 @@ public class TakeAttendance extends AppCompatActivity {
                             final String finalPresentstudentID = presentstudentID;
                             dataRef.child(presentstudentID).child("present").push().setValue(datetime);
                             dataRef.child(presentstudentID).child("total").push().setValue(datetime);
+                            allSubRef.child(presentstudentID).child("present").push().setValue(datetime);
+                            allSubRef.child(presentstudentID).child("total").push().setValue(datetime);
+
                             stdRef.child(presentstudentID).child("attendance").push().setValue(datetime);
                             stdRef.child(presentstudentID).child("tattendance").push().setValue(datetime);
+
                             dataRef.child(presentstudentID).child("id").setValue(presentstudentID);
+                            allSubRef.child(presentstudentID).child("id").setValue(presentstudentID);
+
 
                             stdRef.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     dataRef.child(finalPresentstudentID).child("name").setValue(snapshot.child(finalPresentstudentID).child("name").getValue());
                                     dataRef.child(finalPresentstudentID).child("roll").setValue(snapshot.child(finalPresentstudentID).child("roll").getValue());
+                                    allSubRef.child(finalPresentstudentID).child("name").setValue(snapshot.child(finalPresentstudentID).child("name").getValue());
+                                    allSubRef.child(finalPresentstudentID).child("roll").setValue(snapshot.child(finalPresentstudentID).child("roll").getValue());
                                 }
 
                                 @Override
@@ -163,14 +172,21 @@ public class TakeAttendance extends AppCompatActivity {
                             final String finalAbsentstudentID = absentstudentID;
                             dataRef.child(absentstudentID).child("absent").push().setValue(datetime);
                             dataRef.child(absentstudentID).child("total").push().setValue(datetime);
+
+                            allSubRef.child(absentstudentID).child("absent").push().setValue(datetime);
+                            allSubRef.child(absentstudentID).child("total").push().setValue(datetime);
+
                             stdRef.child(absentstudentID).child("tattendance").push().setValue(datetime);
-                            dataRef.child(presentstudentID).child("id").setValue(absentstudentID);
+                            dataRef.child(absentstudentID).child("id").setValue(absentstudentID);
+                            allSubRef.child(absentstudentID).child("id").setValue(absentstudentID);
 
                             stdRef.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     dataRef.child(finalAbsentstudentID).child("name").setValue(snapshot.child(finalAbsentstudentID).child("name").getValue());
                                     dataRef.child(finalAbsentstudentID).child("roll").setValue(snapshot.child(finalAbsentstudentID).child("roll").getValue());
+                                    allSubRef.child(finalAbsentstudentID).child("name").setValue(snapshot.child(finalAbsentstudentID).child("name").getValue());
+                                    allSubRef.child(finalAbsentstudentID).child("roll").setValue(snapshot.child(finalAbsentstudentID).child("roll").getValue());
                                 }
 
                                 @Override

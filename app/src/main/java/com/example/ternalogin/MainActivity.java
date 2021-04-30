@@ -144,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
+            case R.id.notice:
+                Intent newIntent = new Intent(MainActivity.this, viewNotice.class);
+                startActivity(newIntent);
+                return true;
             case R.id.upDoc:
                 Intent intent = new Intent(MainActivity.this, DocumentActivity.class);
                 startActivity(intent);
