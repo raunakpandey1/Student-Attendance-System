@@ -83,6 +83,7 @@ public class AttendanceSubject extends AppCompatActivity {
                         String subj = subSnapshot.getKey();
                         SubjectList.add(subj);
                     }
+                    SubjectList.remove("All_Subject");
                     adapter = new ArrayAdapter<String>(AttendanceSubject.this,android.R.layout.simple_spinner_dropdown_item, SubjectList);
                     spinner.setAdapter(adapter);
                 }
