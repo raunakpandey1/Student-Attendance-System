@@ -1,19 +1,22 @@
 # TernaLogin (Students Attendance System)
-## This is a College project created by a Group of three Member in second-year Computer Engineering Students from Terna Engineering college
+## This is a College project done by a group of three Computer Engineering Students of second-year from Terna Engineering college , Nerul Navi Mumbai.
 
 ## About the app
 * App OS : Android
 * Min SDK : Andoid 4.0
-* Frontend : JAVA,XML
+* Frontend : JAVA, XML
 * Backend : FireBase by Google
 ## Feature
 * Optimized Splash Screen.
 * Attractive UI design.
-* Recyceler View, Tab Layout, Custom Appbar, many Custom components.
-* Two Users: 1.Admin ,2.Student .
-* Admin Can added information of  student ,and Create Profile.
-* Teacher can take sutdent attendance live,can view studennt attendance.
-* Student can view their attendance with selecting spicific course.
+* Recycler View, Tab Layout, Custom Appbar, many Custom components.
+* Two Users: 1.Faculty ,2.Student .
+* Only faculty can create profile of student.
+* Faculty can take attendance of a student also can view student's attendance.
+* Student can see attendance of thier respective subjects.
+* Application can filter out list of defaulter students(Students with attendance less than 75%).
+* Faculty can message directly to those defaulter's students.
+* Faculty can upload notices in pdf format.
 ## Screen Shot
 [splash]: https://github.com/skgupta77159/Raw-Project/blob/master/AttendanceSystem/AttendanceSystem01.png
 [Dashboard]: https://github.com/skgupta77159/Raw-Project/blob/master/AttendanceSystem/AttendanceSystem02.png

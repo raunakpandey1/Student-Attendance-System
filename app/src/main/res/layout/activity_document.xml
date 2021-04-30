@@ -7,38 +7,51 @@
     android:layout_height="match_parent"
     tools:context=".DocumentActivity">
 
+
     <EditText
         android:id="@+id/editText"
-        android:layout_width="250dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="300dp"
         android:hint="Select file from storage.."
+        android:layout_centerHorizontal="true"
         android:textColor="#0000FF"
-        android:textSize="10sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/btn"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="110dp"
         android:text="Upload file"
-        android:textSize="20sp"
-        android:textColor="#0000FF"/>
-
+        android:background="@drawable/custom_buttonpdf"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
     <Button
-        android:layout_marginTop="420dp"
-        android:layout_marginLeft="130dp"
         android:id="@+id/btn1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/btn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="87dp"
+        android:layout_marginBottom="120dp"
         android:layout="@+id/editText1"
+        android:onClick="btn_action"
+        android:background="@drawable/custom_buttonpdf"
         android:text="Uploaded Files"
-        android:textColor="#0000FF"
-        android:textSize="20sp"
-        android:onClick="btn_action"/>
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>
