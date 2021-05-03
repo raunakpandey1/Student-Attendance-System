@@ -84,6 +84,7 @@ public class DocumentActivity extends AppCompatActivity {
                     if(TextUtils.isEmpty(Title) || TextUtils.isEmpty(Description)){
                         Toast.makeText(DocumentActivity.this, "Please enter title and description", Toast.LENGTH_SHORT).show();
                     }else{
+
                         uploadPDFFileFirebase(data.getData());
                     }
 

@@ -70,6 +70,4 @@
         android:background="@drawable/button_background_color"
         android:textColor="#ffffff"
         android:text="Upload File"/>
-
-
 </RelativeLayout>
