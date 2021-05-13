@@ -47,7 +47,6 @@ public class seeAttendanceSubject extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 year = parent.getSelectedItem().toString();
-                Toast.makeText(seeAttendanceSubject.this, year, Toast.LENGTH_SHORT).show();
             }
 
             @Override

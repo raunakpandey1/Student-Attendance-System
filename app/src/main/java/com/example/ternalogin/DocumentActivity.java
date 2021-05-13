@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ternalogin.model.DocumentDetail;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +25,9 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class DocumentActivity extends AppCompatActivity {
 
     TextView textView;
@@ -32,6 +36,7 @@ public class DocumentActivity extends AppCompatActivity {
 
     StorageReference storageReference;
     DatabaseReference databaseReference;
+    String Title, Description;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,13 +83,12 @@ public class DocumentActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    String Title = title.getText().toString();
-                    String Description = description.getText().toString();
+                    Title = title.getText().toString();
+                    Description = description.getText().toString();
 
                     if(TextUtils.isEmpty(Title) || TextUtils.isEmpty(Description)){
                         Toast.makeText(DocumentActivity.this, "Please enter title and description", Toast.LENGTH_SHORT).show();
                     }else{
-
                         uploadPDFFileFirebase(data.getData());
                     }
 
@@ -112,8 +116,14 @@ public class DocumentActivity extends AppCompatActivity {
                         while(!uriTask.isComplete());
                         Uri uri =uriTask.getResult();
 
-                        DocumentDetail documentDetail = new DocumentDetail(textView.getText().toString(), uri.toString());
-                        databaseReference.child(databaseReference.push().getKey()).setValue(documentDetail);
+                        Calendar calendar = Calendar.getInstance();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+                        SimpleDateFormat keyFormat = new SimpleDateFormat("yyyy-MM-dd-kk-mm-ss");
+                        String dateFormat = simpleDateFormat.format(calendar.getTime());
+                        String keyDate = keyFormat.format(calendar.getTime());
+
+                        DocumentDetail documentDetail = new DocumentDetail(uri.toString(), Title, Description, dateFormat);
+                        databaseReference.child(keyDate).setValue(documentDetail);
                         Toast.makeText(DocumentActivity.this,"File upload", Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
 
