@@ -112,7 +112,6 @@ public class MonthAttendance extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Year = parent.getSelectedItem().toString();
-                Toast.makeText(MonthAttendance.this, Year, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -126,7 +125,6 @@ public class MonthAttendance extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 fMonth = parent.getSelectedItem().toString();
                 f = position;
-                Toast.makeText(MonthAttendance.this, fMonth, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -140,7 +138,6 @@ public class MonthAttendance extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tMonth = parent.getSelectedItem().toString();
                 t = position;
-                Toast.makeText(MonthAttendance.this, tMonth, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
