@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:orientation="vertical"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="30dp">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,7 +100,9 @@
                 android:id="@+id/SSButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/button_background_color"
                 android:text="See Attendance"
                 android:textColor="#FFFFFF" />
@@ -110,9 +112,21 @@
             android:layout_below="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/button_background_color"
             android:text="Message"
+            android:textColor="#FFFFFF" />
+        <Button
+            android:id="@+id/show_notice_button"
+            android:layout_below="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button_background_color"
+            android:text="Notice"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

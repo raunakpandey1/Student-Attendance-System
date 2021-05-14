@@ -1,4 +1,4 @@
-package com.example.ternalogin.views;
+package com.example.ternalogin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.ternalogin.R;
-import com.example.ternalogin.RecyclerViewClickInterface;
 import com.example.ternalogin.adapter.DocumentAdapter;
 import com.example.ternalogin.model.DocumentDetail;
 import com.google.firebase.database.DataSnapshot;
@@ -42,7 +40,6 @@ public class viewNotice extends AppCompatActivity implements RecyclerViewClickIn
         getSupportActionBar().setTitle("Notices");
 
         recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         databaseReference = FirebaseDatabase.getInstance().getReference("DocumentPDF");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -54,7 +51,10 @@ public class viewNotice extends AppCompatActivity implements RecyclerViewClickIn
                     docList.add(documentDetail);
                 }
                 DocumentAdapter docAdapter = new DocumentAdapter(docList, viewNotice.this);
-                recyclerView.setLayoutManager(new LinearLayoutManager(viewNotice.this));
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(viewNotice.this);
+                linearLayoutManager.setReverseLayout(true);
+                linearLayoutManager.setStackFromEnd(true);
+                recyclerView.setLayoutManager(linearLayoutManager);
                 docAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(docAdapter);
             }

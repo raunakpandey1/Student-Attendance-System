@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.ternalogin.Login_Activity;
 import com.example.ternalogin.R;
 import com.example.ternalogin.showMessage;
+import com.example.ternalogin.viewNotice;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +32,7 @@ public class studentProfile extends AppCompatActivity {
 
     private ImageButton imgbutton1;
     private FirebaseAuth mAuth;
-    private Button SSbutton, show_msg_button;
+    private Button SSbutton, show_msg_button, show_notice_button;
     Spinner spinner;
     FirebaseDatabase database;
     DatabaseReference stdRef, stdID, databaseRef;
@@ -61,6 +62,7 @@ public class studentProfile extends AppCompatActivity {
         Sroll = findViewById(R.id.teach_sub);
         Semail = findViewById(R.id.teach_email);
         show_msg_button = findViewById(R.id.show_msg_button);
+        show_notice_button = findViewById(R.id.show_notice_button);
 
         RetrieveData();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -114,9 +116,13 @@ public class studentProfile extends AppCompatActivity {
             }
         });
 
-
-
-
+        show_notice_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(studentProfile.this, viewNotice.class);
+                startActivity(mIntent);
+            }
+        });
 
     }
 

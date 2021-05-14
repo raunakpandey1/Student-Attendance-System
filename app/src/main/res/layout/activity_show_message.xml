@@ -24,6 +24,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/msg_recycler_view"
+            android:paddingTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/button_l_layout"
