@@ -1,0 +1,72 @@
+Index: app/src/main/java/com/example/ternalogin/DocumentActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ternalogin;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.app.ProgressDialog;\r\nimport android.content.Intent;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.text.TextUtils;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.OnProgressListener;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.google.firebase.storage.UploadTask;\r\n\r\npublic class DocumentActivity extends AppCompatActivity {\r\n\r\n    TextView textView;\r\n    EditText title, description;\r\n    Button uploadBtn, selectBtn;\r\n\r\n    StorageReference storageReference;\r\n    DatabaseReference databaseReference;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_document);\r\n\r\n        textView = findViewById(R.id.textView);\r\n        title =findViewById(R.id.title);\r\n        description =findViewById(R.id.description);\r\n        selectBtn =findViewById(R.id.selectBtn);\r\n        uploadBtn =findViewById(R.id.uploadBtn);\r\n\r\n        storageReference = FirebaseStorage.getInstance().getReference();\r\n        databaseReference = FirebaseDatabase.getInstance().getReference(\"DocumentPDF\");\r\n\r\n        uploadBtn.setEnabled(false);\r\n        selectBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n               selectPDF();\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void selectPDF() {\r\n        Intent intent =new Intent();\r\n        intent.setType(\"application/pdf\");\r\n        intent.setAction(intent.ACTION_GET_CONTENT);\r\n        startActivityForResult(Intent.createChooser(intent,\"PDF FILE SELECT\"),12);\r\n\r\n    }\r\n\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, @Nullable final Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n\r\n        if(requestCode==12 && resultCode==RESULT_OK && data!=null && data.getData()!=null)\r\n        {\r\n            uploadBtn.setEnabled(true);\r\n            textView.setText(data.getDataString().substring(data.getDataString().lastIndexOf(\"/\")+1));\r\n\r\n            uploadBtn.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View view) {\r\n\r\n                    String Title = title.getText().toString();\r\n                    String Description = description.getText().toString();\r\n\r\n                    if(TextUtils.isEmpty(Title) || TextUtils.isEmpty(Description)){\r\n                        Toast.makeText(DocumentActivity.this, \"Please enter title and description\", Toast.LENGTH_SHORT).show();\r\n                    }else{\r\n                        uploadPDFFileFirebase(data.getData());\r\n                    }\r\n\r\n                }\r\n            });\r\n\r\n\r\n        }\r\n    }\r\n\r\n    private void uploadPDFFileFirebase(Uri data) {\r\n\r\n        final ProgressDialog progressDialog =new ProgressDialog(this);\r\n        progressDialog.setTitle(\"File is loading...\");\r\n        progressDialog.show();\r\n\r\n        StorageReference reference =storageReference.child(\"upload\" + System.currentTimeMillis() + \".pdf\");\r\n\r\n        reference.putFile(data)\r\n                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {\r\n                    @Override\r\n                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {\r\n\r\n                        Task<Uri> uriTask =taskSnapshot.getStorage().getDownloadUrl();\r\n                        while(!uriTask.isComplete());\r\n                        Uri uri =uriTask.getResult();\r\n\r\n                        DocumentDetail documentDetail = new DocumentDetail(textView.getText().toString(), uri.toString());\r\n                        databaseReference.child(databaseReference.push().getKey()).setValue(documentDetail);\r\n                        Toast.makeText(DocumentActivity.this,\"File upload\", Toast.LENGTH_LONG).show();\r\n                        progressDialog.dismiss();\r\n\r\n                    }\r\n                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {\r\n            @Override\r\n            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {\r\n                double progress =(100.0* snapshot.getBytesTransferred())/snapshot.getTotalByteCount();\r\n                progressDialog.setMessage(\"File uploaded...\" +(int)progress + \"%\");\r\n            }\r\n        });\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ternalogin/DocumentActivity.java	(revision b9514b9d340762ae27d997d01c2e93456a24622d)
++++ app/src/main/java/com/example/ternalogin/DocumentActivity.java	(date 1619781052928)
+@@ -24,6 +24,9 @@
+ import com.google.firebase.storage.StorageReference;
+ import com.google.firebase.storage.UploadTask;
+ 
++import java.text.SimpleDateFormat;
++import java.util.Calendar;
++
+ public class DocumentActivity extends AppCompatActivity {
+ 
+     TextView textView;
+@@ -32,6 +35,9 @@
+ 
+     StorageReference storageReference;
+     DatabaseReference databaseReference;
++    String Title = title.getText().toString();
++    String Description = description.getText().toString();
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -78,12 +84,16 @@
+                 @Override
+                 public void onClick(View view) {
+ 
+-                    String Title = title.getText().toString();
+-                    String Description = description.getText().toString();
++
+ 
+                     if(TextUtils.isEmpty(Title) || TextUtils.isEmpty(Description)){
+                         Toast.makeText(DocumentActivity.this, "Please enter title and description", Toast.LENGTH_SHORT).show();
+                     }else{
++                        Calendar calendar = Calendar.getInstance();
++                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
++                        SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy-MM-dd-kk-mm-ss");
++                        String dateFormat = simpleDateFormat.format(calendar.getTime());
++                        String keyDate = yearFormat.format(calendar.getTime());
+                         uploadPDFFileFirebase(data.getData());
+                     }
+ 
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_4_30_2021_2_09_PM_[Default_Changelist]/shelved.patch
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Checkout_at_4_30_2021_2_09_PM_[Default_Changelist]/shelved.patch	(revision b9514b9d340762ae27d997d01c2e93456a24622d)
++++ .idea/shelf/Uncommitted_changes_before_Checkout_at_4_30_2021_2_09_PM_[Default_Changelist]/shelved.patch	(revision b9514b9d340762ae27d997d01c2e93456a24622d)
+@@ -1,18 +0,0 @@
+-Index: app/src/main/java/com/example/ternalogin/DocumentActivity.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.ternalogin;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.app.ProgressDialog;\r\nimport android.content.Intent;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnSuccessListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.storage.FirebaseStorage;\r\nimport com.google.firebase.storage.OnProgressListener;\r\nimport com.google.firebase.storage.StorageReference;\r\nimport com.google.firebase.storage.UploadTask;\r\n\r\npublic class DocumentActivity extends AppCompatActivity {\r\n\r\n    EditText editText,editText1;\r\n    Button btn,btn1;\r\n\r\n    StorageReference storageReference;\r\n    DatabaseReference databaseReference;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_document);\r\n\r\n        editText = findViewById(R.id.editText);\r\n        btn =findViewById(R.id.btn);\r\n\r\n        storageReference = FirebaseStorage.getInstance().getReference();\r\n        databaseReference = FirebaseDatabase.getInstance().getReference(\"DocumentPDF\");\r\n\r\n        btn.setEnabled(false);\r\n        editText.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n               selectPDF();\r\n\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void selectPDF() {\r\n        Intent intent =new Intent();\r\n        intent.setType(\"application/pdf\");\r\n        intent.setAction(intent.ACTION_GET_CONTENT);\r\n        startActivityForResult(Intent.createChooser(intent,\"PDF FILE SELECT\"),12);\r\n\r\n    }\r\n\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, @Nullable final Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n\r\n        if(requestCode==12 && resultCode==RESULT_OK && data!=null && data.getData()!=null)\r\n        {\r\n            btn.setEnabled(true);\r\n            editText.setText(data.getDataString().substring(data.getDataString().lastIndexOf(\"/\")+1));\r\n\r\n            btn.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View view) {\r\n\r\n                    uploadPDFFileFirebase(data.getData());\r\n                }\r\n            });\r\n\r\n\r\n        }\r\n    }\r\n\r\n    private void uploadPDFFileFirebase(Uri data) {\r\n\r\n        final ProgressDialog progressDialog =new ProgressDialog(this);\r\n        progressDialog.setTitle(\"File is loading...\");\r\n        progressDialog.show();\r\n\r\n        StorageReference reference =storageReference.child(\"upload\" + System.currentTimeMillis() + \".pdf\");\r\n\r\n        reference.putFile(data)\r\n                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {\r\n                    @Override\r\n                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {\r\n\r\n                        Task<Uri> uriTask =taskSnapshot.getStorage().getDownloadUrl();\r\n                        while (!uriTask.isComplete());\r\n                        Uri uri =uriTask.getResult();\r\n\r\n                        DocumentDetail documentDetail = new DocumentDetail(editText.getText().toString(), uri.toString());\r\n                        databaseReference.child(databaseReference.push().getKey()).setValue(documentDetail);\r\n                        Toast.makeText(DocumentActivity.this,\"File upload\", Toast.LENGTH_LONG).show();\r\n                        progressDialog.dismiss();\r\n\r\n                    }\r\n                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {\r\n            @Override\r\n            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {\r\n                double progress =(100.0* snapshot.getBytesTransferred())/snapshot.getTotalByteCount();\r\n                progressDialog.setMessage(\"File uploaded...\" +(int)progress + \"%\");\r\n            }\r\n        });\r\n    }\r\n\r\n    public void btn_action(View view) {\r\n        startActivity(new Intent(getApplicationContext(),View_Uploaded_PDF.class));\r\n\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/com/example/ternalogin/DocumentActivity.java	(revision 7641baa22a419ac87760882078b38924d3b8e317)
+-+++ app/src/main/java/com/example/ternalogin/DocumentActivity.java	(date 1619762995961)
+-@@ -94,7 +94,7 @@
+-                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+- 
+-                         Task<Uri> uriTask =taskSnapshot.getStorage().getDownloadUrl();
+--                        while (!uriTask.isComplete());
+-+                        while(!uriTask.isComplete());
+-                         Uri uri =uriTask.getResult();
+- 
+-                         DocumentDetail documentDetail = new DocumentDetail(editText.getText().toString(), uri.toString());
+diff --git .idea/shelf/Uncommitted_changes_before_Checkout_at_4_30_2021_2_09_PM__Default_Changelist_.xml .idea/shelf/Uncommitted_changes_before_Checkout_at_4_30_2021_2_09_PM__Default_Changelist_.xml
