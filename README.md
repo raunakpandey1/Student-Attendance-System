@@ -1,6 +1,9 @@
 # TernaLogin (Students Attendance System)
 ## This is a College project done by a group of three Computer Engineering Students of second-year from Terna Engineering college , Nerul Navi Mumbai.
-
+## Group Members
+* Raunak Pandey
+* Akash Yadav
+* Sushil Gupta
 ## About the app
 * App OS : Android
 * Min SDK : Andoid 4.0
