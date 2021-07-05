@@ -1,4 +1,4 @@
-# TernaLogin (Students Attendance System)
+# Students Attendance System
 ## This is a College project done by a group of three Computer Engineering Students of second-year from Terna Engineering college , Nerul Navi Mumbai.
 ## Group Members
 * Raunak Pandey
@@ -13,7 +13,7 @@
 * Optimized Splash Screen.
 * Attractive UI design.
 * Recycler View, Tab Layout, Custom Appbar, many Custom components.
-* Two Users: 1.Faculty ,2.Student .
+* Two Users: 1.Faculty , 2.Student.
 * Only faculty can create profile of student.
 * Faculty can take attendance of a student also can view student's attendance.
 * Student can see attendance of thier respective subjects.
